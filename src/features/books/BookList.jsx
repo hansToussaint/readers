@@ -1,8 +1,7 @@
 import styled from "styled-components";
 import BookItem from "./BookItem";
-import { useQuery } from "@tanstack/react-query";
-import { getBooks } from "../../services/apiBooks";
 import Spinner from "../../ui/Spinner";
+import { useBooks } from "./useBooks";
 
 const StyledBookList = styled.div`
   width: 100%;
@@ -14,10 +13,7 @@ const StyledBookList = styled.div`
 `;
 
 function BookList() {
-  const { isLoading, data, error } = useQuery({
-    queryKey: ["books"],
-    queryFn: () => getBooks("sexe"),
-  });
+  const { isLoading, data, error } = useBooks();
 
   const books = data?.items;
 
@@ -30,7 +26,6 @@ function BookList() {
       {books.map((book) => (
         <BookItem book={book} key={book.id} />
       ))}
-      {/* <BookItem /> */}
     </StyledBookList>
   );
 }

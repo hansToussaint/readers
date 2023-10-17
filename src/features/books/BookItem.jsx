@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const StyledBookItem = styled.div`
@@ -5,30 +6,33 @@ const StyledBookItem = styled.div`
   flex-direction: column;
   gap: 0.2rem;
   width: 20rem;
-  box-shadow: var(--shadow-md);
   padding: 0.8rem;
   margin: 1rem 0.5rem;
-  background-color: var(--color-grey-50);
+  background-color: transparent;
   /* background: red; */
 
-  border: 1px solid var(--color-grey-300);
-  border-radius: var(--border-radius-tiny);
+  &:hover {
+    box-shadow: var(--shadow-lg);
+    background-color: var(--color-grey-50);
+  }
 `;
 
 const Img = styled.img`
-  height: 100%;
+  height: 30rem;
   width: 90%;
   margin: 4px auto;
   border: 1px solid var(--color-grey-200);
   border-radius: var(--border-radius-tiny);
 
-  object-fit: cover;
+  /* object-fit: cover; */
   object-position: center;
 `;
 
 /*eslint-disable react/prop-types*/
 function BookItem({ book }) {
-  console.log(book);
+  // console.log(book);
+
+  const navigate = useNavigate();
 
   const src = book.volumeInfo.imageLinks.thumbnail;
 
@@ -38,7 +42,11 @@ function BookItem({ book }) {
 
   return (
     <StyledBookItem>
-      <Img src={src} alt="bookImage" />
+      <Img
+        src={src}
+        alt="bookImage"
+        onClick={() => navigate(`/books/${book.id}`)}
+      />
       <h3>{title}</h3>
       <p>rate ⭐⭐⭐⭐</p>
     </StyledBookItem>

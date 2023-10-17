@@ -32,14 +32,14 @@ function App() {
         <Routes>
           <Route element={<AppLayout />}>
             <Route index element={<Root />} />
-            <Route path="results" element={<BooksResults />} />
-            <Route path="book/:id" element={<BookInfo />} />
+            <Route path="books" element={<BooksResults />} />
+            <Route path="books/:bookId" element={<BookInfo />} />
             <Route path="settings" element={<Settings />} />
           </Route>
 
           <Route path="bookmarks" element={<Bookmarks />} />
           <Route path="account" element={<Account />} />
-          <Route path="book/:id/:id" element={<Read />} />
+          <Route path="books/:bookId/read" element={<Read />} />
           <Route path="login" element={<Login />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
