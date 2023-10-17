@@ -1,5 +1,11 @@
+import BookList from "../features/books/BookList";
+
 function BooksResults() {
-  return <div>All results</div>;
+  return (
+    <div>
+      <BookList />
+    </div>
+  );
 }
 
 export default BooksResults;

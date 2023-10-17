@@ -7,6 +7,7 @@ const Input = styled.input`
   color: var(--color-grey-600);
   border: none;
   border-radius: 100px;
+  box-shadow: var(--shadow-sm);
   padding: 0.7rem 3rem;
   width: 85%;
   height: 90%;

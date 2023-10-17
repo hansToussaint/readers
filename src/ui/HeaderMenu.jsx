@@ -9,6 +9,7 @@ import Menu from "./Menu";
 const StyledHeaderMenu = styled.ul`
   display: flex;
   gap: 0.8rem;
+  z-index: 10;
 
   align-self: stretch;
 `;

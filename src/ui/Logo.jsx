@@ -13,6 +13,7 @@ const Img = styled.img`
   object-fit: cover;
   object-position: center;
 `;
+
 function Logo() {
   const src = "/logo-light.png";
 

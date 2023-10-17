@@ -16,7 +16,7 @@ const Form = styled.form`
     /* height: 90%; */
     border: none;
     padding-top: 0.5rem;
-    background-color: var(--color-grey-300);
+    background-color: transparent;
 
     &:hover svg {
       color: var(--color-brand-600);
