@@ -55,14 +55,23 @@ const StyledButton = styled.button`
     color: var(--color-grey-400);
     transition: all 0.3s;
   }
+
+  & span {
+    display: block;
+    float: left;
+  }
 `;
 
 const LiWithBorder = styled.li`
   width: 100%;
-  font-size: 1.7rem;
+  font-size: 1.9rem;
 
   &:last-child {
     border-top: 1px solid var(--color-grey-200);
+  }
+
+  & i {
+    font-size: 1.6rem;
   }
 `;
 

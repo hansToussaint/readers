@@ -1,8 +1,12 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { BsFillBookmarkStarFill } from "react-icons/bs";
+
+import { useDarkMode } from "../context/DarkModeContext";
+
+import { BsFillBookmarkStarFill, BsMoon, BsSun } from "react-icons/bs";
 import { VscSignOut, VscSettingsGear } from "react-icons/vsc";
 import { FcAbout } from "react-icons/fc";
+
 import UserAvatar from "../features/authentication/UserAvatar";
 import Menu from "./Menu";
 
@@ -82,6 +86,8 @@ const Notification = styled.span`
 `;
 
 function HeaderMenu() {
+  const { isDarkMode, toggleDarkMode } = useDarkMode();
+
   const navigate = useNavigate();
 
   const numBookmarks = 2;
@@ -108,6 +114,18 @@ function HeaderMenu() {
 
           <Menu.List name="openMenu">
             <Menu.Button icon={<FcAbout />}>About us</Menu.Button>
+
+            <Menu.Button
+              icon={isDarkMode ? <BsSun /> : <BsMoon />}
+              onClick={toggleDarkMode}
+            >
+              Dark theme
+              <br />
+              <span>
+                <i>{isDarkMode ? "On" : "Off"}</i>
+              </span>
+            </Menu.Button>
+
             <Menu.Button
               icon={<VscSettingsGear />}
               onClick={() => navigate("/settings")}

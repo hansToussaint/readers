@@ -3,7 +3,7 @@ const KEY = "AIzaSyBHEJFy_MWLEXpsEi-2cIyWpZMcxGPCunk";
 export async function getBooks(title) {
   try {
     const response = await fetch(
-      `https://www.googleapis.com/books/v1/volumes?q=${title}&filter=ebooks&key=${KEY}&maxResults=40`
+      `https://www.googleapis.com/books/v1/volumes?q=${title}&filter=free-ebooks&key=${KEY}&maxResults=40`
     );
 
     const data = await response.json();

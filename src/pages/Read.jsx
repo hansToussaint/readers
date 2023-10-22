@@ -1,5 +1,7 @@
+import ReadBook from "../features/books/ReadBook";
+
 function Read() {
-  return <div>Let&apos;s Read the book</div>;
+  return <ReadBook />;
 }
 
 export default Read;

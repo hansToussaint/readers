@@ -13,6 +13,7 @@ import Account from "./pages/Account";
 import Read from "./pages/Read";
 import Settings from "./pages/Settings";
 import PageNotFound from "./pages/PageNotFound";
+import { DarkModeProvider } from "./context/DarkModeContext";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -24,27 +25,29 @@ const queryClient = new QueryClient({
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <ReactQueryDevtools initialIsOpen={false} />
+    <DarkModeProvider>
+      <QueryClientProvider client={queryClient}>
+        <ReactQueryDevtools initialIsOpen={false} />
 
-      <GlobalStyles />
-      <BrowserRouter>
-        <Routes>
-          <Route element={<AppLayout />}>
-            <Route index element={<Root />} />
-            <Route path="books" element={<BooksResults />} />
-            <Route path="books/:bookId" element={<BookInfo />} />
-            <Route path="settings" element={<Settings />} />
-          </Route>
+        <GlobalStyles />
+        <BrowserRouter>
+          <Routes>
+            <Route element={<AppLayout />}>
+              <Route index element={<Root />} />
+              <Route path="books" element={<BooksResults />} />
+              <Route path="books/:bookId" element={<BookInfo />} />
+              <Route path="settings" element={<Settings />} />
+            </Route>
 
-          <Route path="bookmarks" element={<Bookmarks />} />
-          <Route path="account" element={<Account />} />
-          <Route path="books/:bookId/read" element={<Read />} />
-          <Route path="login" element={<Login />} />
-          <Route path="*" element={<PageNotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </QueryClientProvider>
+            <Route path="bookmarks" element={<Bookmarks />} />
+            <Route path="account" element={<Account />} />
+            <Route path="books/:bookId/read" element={<Read />} />
+            <Route path="login" element={<Login />} />
+            <Route path="*" element={<PageNotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </QueryClientProvider>
+    </DarkModeProvider>
   );
 }
 
