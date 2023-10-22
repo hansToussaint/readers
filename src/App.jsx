@@ -34,8 +34,8 @@ function App() {
           <Routes>
             <Route element={<AppLayout />}>
               <Route index element={<Root />} />
-              <Route path="books" element={<BooksResults />} />
-              <Route path="books/:bookId" element={<BookInfo />} />
+              <Route path="search" element={<BooksResults />} />
+              <Route path="book/:bookId" element={<BookInfo />} />
               <Route path="settings" element={<Settings />} />
             </Route>
 

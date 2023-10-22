@@ -1,7 +1,8 @@
+import { useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import styled from "styled-components";
 import Input from "./Input";
-import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 const Form = styled.form`
   width: 45%;
@@ -39,19 +40,33 @@ const Form = styled.form`
 `;
 
 function SearchBooks() {
-  const { register, handleSubmit } = useForm();
+  const [search, setSearch] = useState("");
+  const query = search.toLowerCase().replaceAll(" ", "+");
 
-  function onSubmitSearch(data) {
-    console.log(data);
+  const navigate = useNavigate();
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    if (!search) return;
+
+    navigate({
+      pathname: "/search",
+      search: `?query=${query}`,
+    });
+
+    setSearch("");
   }
 
   return (
-    <Form onSubmit={handleSubmit(onSubmitSearch)}>
+    <Form onSubmit={handleSubmit}>
       <Input
+        autoComplete="off"
         type="text"
         id="doSearch"
         placeholder="Find your books"
-        {...register("doSearch")}
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
       />
       <button>
         <AiOutlineSearch />

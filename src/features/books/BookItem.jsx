@@ -45,7 +45,7 @@ function BookItem({ book }) {
       <Img
         src={src}
         alt="bookImage"
-        onClick={() => navigate(`/books/${book.id}`)}
+        onClick={() => navigate(`/book/${book.id}`)}
       />
       <h3>{title}</h3>
       <p>rate ⭐⭐⭐⭐</p>
