@@ -1,14 +1,11 @@
 import { useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
+import { RxCross2 } from "react-icons/rx";
 import styled from "styled-components";
 import Input from "./Input";
 import { useNavigate } from "react-router-dom";
 
 const Form = styled.form`
-  width: 45%;
-  height: 10%;
-  margin: 15rem auto;
-
   display: flex;
   align-items: center;
   justify-content: center;
@@ -39,7 +36,20 @@ const Form = styled.form`
   }
 `;
 
-function SearchBooks() {
+const Reset = styled.button`
+  margin-left: -6rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+
+  & span {
+    border-left: 1px solid var(--color-grey-300);
+    height: 4rem;
+    margin-right: 1.2rem;
+  }
+`;
+
+function FormSearch() {
   const [search, setSearch] = useState("");
   const query = search.toLowerCase().replaceAll(" ", "+");
 
@@ -55,7 +65,7 @@ function SearchBooks() {
       search: `?query=${query}`,
     });
 
-    setSearch("");
+    // if (location.pathname === "/search") setSearch(query);
   }
 
   return (
@@ -68,6 +78,20 @@ function SearchBooks() {
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
+
+      {location.pathname === "/search" && (
+        <>
+          {search && (
+            <Reset>
+              <button onClick={() => setSearch("")}>
+                <RxCross2 />
+              </button>
+              <span></span>
+            </Reset>
+          )}
+        </>
+      )}
+
       <button>
         <AiOutlineSearch />
       </button>
@@ -75,4 +99,4 @@ function SearchBooks() {
   );
 }
 
-export default SearchBooks;
+export default FormSearch;

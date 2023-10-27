@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import SearchBooks from "../ui/SearchBooks";
+import FormSearch from "../ui/FormSearch";
 
 const StyledRoot = styled.div`
   width: 100%;
@@ -18,10 +18,22 @@ const StyledRoot = styled.div`
   display: flex;
 `;
 
+const SeacrhDiv = styled.div`
+  width: 45%;
+  height: 10%;
+  margin: 15rem auto;
+
+  @media screen and (max-width: 1150px) {
+    width: 57%;
+  }
+`;
+
 function Root() {
   return (
     <StyledRoot>
-      <SearchBooks />
+      <SeacrhDiv>
+        <FormSearch />
+      </SeacrhDiv>
     </StyledRoot>
   );
 }

@@ -8,12 +8,11 @@ export function useBooks() {
   const [searchParams] = useSearchParams();
 
   const searchQuery = searchParams.get("query");
-  console.log(searchQuery);
 
   const { isLoading, data, error } = useQuery({
-    queryKey: ["books"],
+    queryKey: ["books", searchQuery],
     queryFn: () => getBooks(searchQuery),
   });
 
-  return { isLoading, data, error };
+  return { isLoading, data, error, searchQuery };
 }

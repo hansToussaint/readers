@@ -14,6 +14,7 @@ import Read from "./pages/Read";
 import Settings from "./pages/Settings";
 import PageNotFound from "./pages/PageNotFound";
 import { DarkModeProvider } from "./context/DarkModeContext";
+import { ViewResultsProvider } from "./context/ViewResultsContext";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -26,27 +27,31 @@ const queryClient = new QueryClient({
 function App() {
   return (
     <DarkModeProvider>
-      <QueryClientProvider client={queryClient}>
-        <ReactQueryDevtools initialIsOpen={false} />
+      <ViewResultsProvider>
+        <QueryClientProvider client={queryClient}>
+          <ReactQueryDevtools initialIsOpen={false} />
 
-        <GlobalStyles />
-        <BrowserRouter>
-          <Routes>
-            <Route element={<AppLayout />}>
-              <Route index element={<Root />} />
-              <Route path="search" element={<BooksResults />} />
-              <Route path="book/:bookId" element={<BookInfo />} />
-              <Route path="settings" element={<Settings />} />
-            </Route>
+          <GlobalStyles />
+          <BrowserRouter>
+            <Routes>
+              <Route element={<AppLayout />}>
+                <Route index element={<Root />} />
 
-            <Route path="bookmarks" element={<Bookmarks />} />
-            <Route path="account" element={<Account />} />
-            <Route path="books/:bookId/read" element={<Read />} />
-            <Route path="login" element={<Login />} />
-            <Route path="*" element={<PageNotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </QueryClientProvider>
+                <Route path="search" element={<BooksResults />} />
+
+                <Route path="book/:bookId" element={<BookInfo />} />
+                <Route path="settings" element={<Settings />} />
+              </Route>
+
+              <Route path="bookmarks" element={<Bookmarks />} />
+              <Route path="account" element={<Account />} />
+              <Route path="books/:bookId/read" element={<Read />} />
+              <Route path="login" element={<Login />} />
+              <Route path="*" element={<PageNotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </QueryClientProvider>
+      </ViewResultsProvider>
     </DarkModeProvider>
   );
 }
