@@ -36,7 +36,7 @@ const Form = styled.form`
   }
 `;
 
-const Reset = styled.button`
+const Reset = styled.div`
   margin-left: -6rem;
   display: flex;
   gap: 1rem;

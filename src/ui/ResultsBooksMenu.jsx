@@ -1,9 +1,10 @@
 import { TfiLayoutGrid3, TfiViewList } from "react-icons/tfi";
-import { IoIosArrowDown } from "react-icons/io";
 import styled, { css } from "styled-components";
 import { useBooks } from "../features/books/useBooks";
 import { useViewResults } from "../context/ViewResultsContext";
-import { useState } from "react";
+import OrderBy from "./OrderBy";
+import { useSearchParams } from "react-router-dom";
+import { PAGE_SIZE } from "../utils/contants";
 
 const StyledMenu = styled.div`
   width: 100%;
@@ -44,46 +45,53 @@ const ButtonSVG = styled.button`
     padding: 0.8rem 0.6rem;
 
     ${(props) =>
-      props.active &&
+      props.$active &&
       css`
         color: var(--color-brand-500);
-        background-color: var(--color-grey-200);
+        background-color: var(--color-grey-100);
         border-radius: var(--border-radius-sm);
       `}
   }
 `;
 
-const SortDiv = styled.div`
-  display: flex;
-  gap: 0.58rem;
-  align-items: center;
-`;
-
 function ResultsBooksMenu() {
-  const [curOpen] = useState(true);
   const { data, searchQuery } = useBooks();
   const { isLargeView, largeView, smallView } = useViewResults();
 
-  console.log(isLargeView === curOpen);
+  const [searchParams] = useSearchParams();
+
+  const count = data?.items.length;
+  const currentPage = !searchParams.get("page")
+    ? 1
+    : Number(searchParams.get("page"));
+
+  const pageCount = Math.ceil(count / PAGE_SIZE);
+  // console.log(pageCount);
 
   return (
     <StyledMenu>
       <div>
-        <ButtonSVG active={isLargeView === curOpen}>
+        <ButtonSVG $active={isLargeView}>
           <TfiViewList onClick={largeView} />
         </ButtonSVG>
 
-        <ButtonSVG active={isLargeView === !curOpen}>
+        <ButtonSVG $active={!isLargeView}>
           <TfiLayoutGrid3 onClick={smallView} />
         </ButtonSVG>
       </div>
       <p>
-        Showing 1-10 of {data?.totalItems} results for <i>{searchQuery}</i>
+        Showing <span>{(currentPage - 1) * PAGE_SIZE + 1}</span>-
+        <span>
+          {currentPage === pageCount ? count : currentPage * PAGE_SIZE}
+        </span>{" "}
+        of {count} results for <i>{searchQuery}</i>
       </p>
-      <SortDiv>
-        <span>Sort By</span>
-        <IoIosArrowDown />
-      </SortDiv>
+      <OrderBy
+        options={[
+          { value: "relevance", label: "Best Matches" },
+          { value: "newest", label: "Publication Date" },
+        ]}
+      />
     </StyledMenu>
   );
 }

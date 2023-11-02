@@ -3,6 +3,7 @@ import BookList from "../features/books/BookList";
 import FormSearch from "../ui/FormSearch";
 import ResultsBooksMenu from "../ui/ResultsBooksMenu";
 import Heading from "../ui/Heading";
+import ScrollToTop from "../ui/ScrollToTop";
 
 const SearchDiv = styled.div`
   /* background-image: linear-gradient(
@@ -31,7 +32,7 @@ const ResultsDiv = styled.div`
 
   /* gap: 2rem; */
 
-  margin: 0 10%;
+  margin: 0 8%;
 
   @media screen and (max-width: 1150px) {
     /* background-color: red; */
@@ -50,6 +51,7 @@ function BooksResults() {
         <ResultsBooksMenu />
         <BookList />
       </ResultsDiv>
+      <ScrollToTop />
     </>
   );
 }

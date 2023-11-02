@@ -1,4 +1,6 @@
-const KEY = "AIzaSyBHEJFy_MWLEXpsEi-2cIyWpZMcxGPCunk";
+import { PAGE_SIZE } from "../utils/contants";
+
+const KEY = "AIzaSyBRkH1NXivDSK5Naaug54runNaOyBd7U3Q";
 
 export async function getBooks(title) {
   try {
@@ -10,6 +12,34 @@ export async function getBooks(title) {
 
     if (!response.ok)
       throw new Error(`Books could not be loaded (${response.status})`);
+
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+//
+export async function getOrderedBooks(title, orderBy, page) {
+  try {
+    const from = (page - 1) * PAGE_SIZE;
+    const to = from + PAGE_SIZE;
+
+    const response = await fetch(
+      `https://www.googleapis.com/books/v1/volumes?q=${title}&filter=ebooks&orderBy=${orderBy}&key=${KEY}&startIndex=${from}&maxResults=${to}`
+    );
+
+    const allData = await response.json();
+
+    const data = allData.items.slice(from, to);
+
+    if (!response.ok)
+      throw new Error(`Books could not be loaded (${response.status})`);
+
+    // if (page) {
+    // }
+
+    // console.log(data);
 
     return data;
   } catch (error) {

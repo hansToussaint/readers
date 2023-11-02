@@ -1,8 +1,10 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import Heading from "../../ui/Heading";
+import { format, parseISO } from "date-fns";
+import { formatCurrency } from "../../utils/helpers";
 
-const StyledBookItem = styled.div`
+const StyledBookItemMini = styled.div`
   /* width: 36rem;
   height: 40rem; */
 
@@ -36,6 +38,8 @@ const Img = styled.img`
   /* width: 13rem;
   height: 19.6rem; */
 
+  box-shadow: var(--shadow-book);
+
   min-width: 17.5rem;
   min-height: 26.5rem;
 
@@ -55,21 +59,29 @@ const InfoBookDiv = styled.div`
   height: 100%;
   width: 100%;
   padding: 1rem;
+
+  & > :last-child {
+    font-weight: 600;
+  }
 `;
 
 /*eslint-disable react/prop-types*/
-function BookItem({ book }) {
+function BookItemMini({ book }) {
   const navigate = useNavigate();
 
+  // const id =
   const src = book.volumeInfo.imageLinks.smallThumbnail;
   const title = book.volumeInfo.title;
   const author = book.volumeInfo.authors;
   const date = book.volumeInfo.publishedDate;
+
+  const price = book.saleInfo.listPrice?.amount * 0.011;
+
   if (!src) return;
 
   return (
     <>
-      <StyledBookItem>
+      <StyledBookItemMini>
         <Img
           src={src}
           alt="bookImage"
@@ -80,12 +92,14 @@ function BookItem({ book }) {
             {title}
           </Heading>
           <span>
-            by {author ? author : "Unknown"} {date && `| ${date}`}
+            by {author ? author : "Unknown"}{" "}
+            {date && `| ${format(parseISO(date), "MMM d, Y")}`}
           </span>
+          <span>{price > 0 ? formatCurrency(price) : "FREE"}</span>
         </InfoBookDiv>
-      </StyledBookItem>
+      </StyledBookItemMini>
     </>
   );
 }
 
-export default BookItem;
+export default BookItemMini;

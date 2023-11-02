@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import Heading from "../../ui/Heading";
 import { useNavigate } from "react-router-dom";
+import { format, parseISO } from "date-fns";
+import { formatCurrency } from "../../utils/helpers";
 
 const StyledBookItemLarge = styled.div`
   width: 100%;
@@ -42,18 +44,25 @@ const InfoBookDiv = styled.div`
   flex-direction: column;
   gap: 0.5rem;
 
+  position: relative;
+
   height: 100%;
   width: 100%;
   padding: 1rem;
   background-color: var(--color-grey-100);
+
+  & h3 {
+    overflow: hidden;
+  }
 `;
 
 const DivAbout = styled.div`
   /* background: red; */
-  overflow-y: auto;
 
   display: flex;
   flex-direction: column;
+
+  overflow-y: auto;
 
   /* margin: 1rem 0; */
   & span {
@@ -62,8 +71,35 @@ const DivAbout = styled.div`
   }
 `;
 
+const StyledPrice = styled.div`
+  position: absolute;
+  bottom: 0;
+
+  & span {
+    font-size: 2rem;
+    color: var(--color-yellow-700);
+  }
+
+  & div {
+    /* width: 2rem; */
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    /* background-color: red; */
+    margin: 1.5rem 0;
+
+    & p:first-child {
+      /* width: 5rem; */
+      border-bottom: 1px solid var(--color-grey-600);
+      padding-right: 15rem;
+    }
+  }
+
+  /* background-color: grey; */
+`;
+
 /*eslint-disable react/prop-types*/
-function BookItem({ book }) {
+function BookItemLarge({ book }) {
   const navigate = useNavigate();
 
   const src = book.volumeInfo.imageLinks.thumbnail;
@@ -77,7 +113,9 @@ function BookItem({ book }) {
     .replaceAll("<b>", "")
     .replaceAll("</b>", "");
 
-  if (!src) return;
+  const price = book.saleInfo.listPrice?.amount * 0.011;
+  // const currency = book.saleInfo.listPrice?.currencyCode;
+  // const { viewability } = book.accessInfo;
 
   return (
     <StyledBookItemLarge>
@@ -91,7 +129,7 @@ function BookItem({ book }) {
           {title}
         </Heading>
         <span>
-          by {author} | {date}
+          by {author} {date && ` | ${format(parseISO(date), "MMM d, Y")}`}
         </span>
         <Heading as="h3">{subtitle}</Heading>
         <DivAbout>
@@ -101,10 +139,16 @@ function BookItem({ book }) {
             </Heading>
           )}
         </DivAbout>
-        {/* <Link>more... </Link> */}
+        <StyledPrice>
+          {/* <div>
+            <p>Available now</p>
+            <p>Viewability: {viewability.replaceAll("_", " ")}</p>
+          </div> */}
+          <span>{price > 0 ? formatCurrency(price) : "FREE"}</span>
+        </StyledPrice>
       </InfoBookDiv>
     </StyledBookItemLarge>
   );
 }
 
-export default BookItem;
+export default BookItemLarge;

@@ -5,9 +5,9 @@ import HeaderMenu from "./HeaderMenu";
 const StyledHeader = styled.header`
   background-color: var(--color-grey-0);
 
-  /* padding: 1.2rem 11%; */
+  padding: 1.2rem 8%;
 
-  padding: 1.2rem 4.5rem;
+  /* padding: 1.2rem 4.5rem; */
 
   border-bottom: 1px solid var(--color-grey-200);
 
@@ -16,6 +16,11 @@ const StyledHeader = styled.header`
   align-items: center;
   justify-content: space-between;
   justify-items: center;
+
+  @media screen and (max-width: 1150px) {
+    /* background-color: red; */
+    padding: 1.2rem 0;
+  }
 `;
 
 function Header() {

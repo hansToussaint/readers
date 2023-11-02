@@ -4,6 +4,8 @@ import BookItemMini from "./BookItemMini";
 import Spinner from "../../ui/Spinner";
 import { useBooks } from "./useBooks";
 import { useViewResults } from "../../context/ViewResultsContext";
+import Pagination from "../../ui/Pagination";
+import { useOrderedBooks } from "./useOrderedBooks";
 
 const StyledBookList = styled.div`
   width: 100%;
@@ -26,30 +28,43 @@ const StyledBookList = styled.div`
 `;
 
 function BookList() {
-  const { isLoading, data, error } = useBooks();
+  const { data } = useBooks();
+  const count = data?.items.length;
+
+  const {
+    isLoading: isLoadingOrderedBooks,
+    data: dataOrderedBooks,
+    error: errorOrderedBooks,
+  } = useOrderedBooks();
   const { isLargeView } = useViewResults();
 
-  const books = data?.items;
+  // const books = data?.items;
+  // const orderedbooks = dataOrderedBooks?.items;
+  const orderedbooks = dataOrderedBooks;
+  // console.log(dataOrderedBooks);
 
-  console.log(error);
+  // console.log(error, errorOrderedBooks);
+  console.log(errorOrderedBooks);
 
-  if (isLoading) return <Spinner />;
+  // if (isLoading || isLoadingOrderedBooks) return <Spinner />;
+  if (isLoadingOrderedBooks) return <Spinner />;
 
   return (
     <>
       {isLargeView ? (
         <StyledBookList type="large">
-          {books.map((book) => (
+          {orderedbooks?.map((book) => (
             <BookItemLarge book={book} key={book.id} />
           ))}
         </StyledBookList>
       ) : (
         <StyledBookList type="mini">
-          {books.map((book) => (
+          {orderedbooks.map((book) => (
             <BookItemMini book={book} key={book.id} />
           ))}
         </StyledBookList>
       )}
+      <Pagination count={count} />
     </>
   );
 }
