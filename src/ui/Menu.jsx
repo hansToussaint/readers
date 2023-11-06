@@ -26,8 +26,8 @@ const StyledToggle = styled.button`
 const StyledList = styled.ul`
   position: fixed;
 
-  right: ${(props) => props.position.x}px;
-  top: ${(props) => props.position.y}px;
+  right: ${(props) => props.$position.x}px;
+  top: ${(props) => props.$position.y}px;
 
   background-color: var(--color-grey-100);
   box-shadow: var(--shsdow-md);
@@ -124,7 +124,7 @@ function List({ name, children }) {
   if (name !== openName) return null;
 
   return (
-    <StyledList position={position} ref={ref}>
+    <StyledList $position={position} ref={ref}>
       {children}
     </StyledList>
   );

@@ -71,6 +71,7 @@ function FormSearch() {
   return (
     <Form onSubmit={handleSubmit}>
       <Input
+        $specialStyle="search"
         autoComplete="off"
         type="text"
         id="doSearch"

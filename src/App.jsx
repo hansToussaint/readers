@@ -8,13 +8,16 @@ import AppLayout from "./ui/AppLayout";
 import BooksResults from "./pages/BooksResults";
 import BookInfo from "./pages/BookInfo";
 import Bookmarks from "./pages/Bookmarks";
-import Login from "./pages/Login";
 import Account from "./pages/Account";
 import Read from "./pages/Read";
 import Settings from "./pages/Settings";
 import PageNotFound from "./pages/PageNotFound";
 import { DarkModeProvider } from "./context/DarkModeContext";
 import { ViewResultsProvider } from "./context/ViewResultsContext";
+import { Toaster } from "react-hot-toast";
+import ProtectedRoute from "./ui/ProtectedRoute";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -40,16 +43,47 @@ function App() {
                 <Route path="search" element={<BooksResults />} />
 
                 <Route path="book/:bookId" element={<BookInfo />} />
-                <Route path="settings" element={<Settings />} />
               </Route>
 
-              <Route path="bookmarks" element={<Bookmarks />} />
-              <Route path="account" element={<Account />} />
               <Route path="books/:bookId/read" element={<Read />} />
-              <Route path="login" element={<Login />} />
+              <Route
+                path="bookmarks"
+                element={
+                  <ProtectedRoute>
+                    <Bookmarks />
+                  </ProtectedRoute>
+                }
+              />
+              <Route path="account" element={<Account />} />
+              <Route path="settings" element={<Settings />} />
+
+              <Route path="signIn" element={<SignIn />} />
+              <Route path="signUp" element={<SignUp />} />
+
               <Route path="*" element={<PageNotFound />} />
             </Routes>
           </BrowserRouter>
+
+          <Toaster
+            position="top-center"
+            gutter={12}
+            containerStyle={{ margin: "8px" }}
+            toastOptions={{
+              success: {
+                duration: 3000,
+              },
+              error: {
+                duration: 5000,
+              },
+              style: {
+                fontSize: "16px",
+                maxWidth: "500px",
+                padding: "16px, 24px",
+                backgroundColor: "var(--color-grey-0)",
+                color: "var(--color-grey-700)",
+              },
+            }}
+          />
         </QueryClientProvider>
       </ViewResultsProvider>
     </DarkModeProvider>

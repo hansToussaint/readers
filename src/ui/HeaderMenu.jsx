@@ -4,11 +4,14 @@ import styled from "styled-components";
 import { useDarkMode } from "../context/DarkModeContext";
 
 import { BsFillBookmarkStarFill, BsMoon, BsSun } from "react-icons/bs";
-import { VscSignOut, VscSettingsGear } from "react-icons/vsc";
+import { VscSignOut, VscSignIn, VscSettingsGear } from "react-icons/vsc";
 import { FcAbout } from "react-icons/fc";
 
 import UserAvatar from "../features/authentication/UserAvatar";
 import Menu from "./Menu";
+import { useSignOut } from "../features/authentication/useSignOut";
+import SpinnerMini from "./SpinnerMini";
+import { useUser } from "../features/authentication/useUser";
 
 const StyledHeaderMenu = styled.ul`
   display: flex;
@@ -87,6 +90,9 @@ const Notification = styled.span`
 
 function HeaderMenu() {
   const { isDarkMode, toggleDarkMode } = useDarkMode();
+  const { signOut, isLoading } = useSignOut();
+  const { isAuthenticated } = useUser();
+  console.log(isAuthenticated);
 
   const navigate = useNavigate();
 
@@ -132,7 +138,22 @@ function HeaderMenu() {
             >
               Settings
             </Menu.Button>
-            <Menu.Button icon={<VscSignOut />}>Sign out</Menu.Button>
+
+            {isAuthenticated ? (
+              <Menu.Button
+                icon={!isLoading ? <VscSignOut /> : <SpinnerMini />}
+                onClick={signOut}
+              >
+                Sign out
+              </Menu.Button>
+            ) : (
+              <Menu.Button
+                icon={<VscSignIn />}
+                onClick={() => navigate("/signIn")}
+              >
+                Sign in
+              </Menu.Button>
+            )}
           </Menu.List>
         </Menu>
       </Li>
