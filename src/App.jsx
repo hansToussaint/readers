@@ -18,6 +18,7 @@ import { Toaster } from "react-hot-toast";
 import ProtectedRoute from "./ui/ProtectedRoute";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
+import PasswordRestore from "./features/authentication/passwordRestore";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -59,6 +60,7 @@ function App() {
 
               <Route path="signIn" element={<SignIn />} />
               <Route path="signUp" element={<SignUp />} />
+              <Route path="/password-restore" element={<PasswordRestore />} />
 
               <Route path="*" element={<PageNotFound />} />
             </Routes>

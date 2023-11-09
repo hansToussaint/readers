@@ -1,9 +1,9 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-import { useDarkMode } from "../context/DarkModeContext";
+// import { useDarkMode } from "../context/DarkModeContext";
 
-import { BsFillBookmarkStarFill, BsMoon, BsSun } from "react-icons/bs";
+import { BsFillBookmarkStarFill } from "react-icons/bs";
 import { VscSignOut, VscSignIn, VscSettingsGear } from "react-icons/vsc";
 import { FcAbout } from "react-icons/fc";
 
@@ -54,6 +54,11 @@ const Li = styled.li`
 `;
 
 const StyledNavLink = styled(NavLink)`
+  & img {
+    height: 4.5rem;
+    width: 4.5rem;
+  }
+
   &:link,
   &:visited {
     display: flex;
@@ -89,7 +94,7 @@ const Notification = styled.span`
 `;
 
 function HeaderMenu() {
-  const { isDarkMode, toggleDarkMode } = useDarkMode();
+  // const { isDarkMode, toggleDarkMode } = useDarkMode();
   const { signOut, isLoading } = useSignOut();
   const { isAuthenticated } = useUser();
   console.log(isAuthenticated);
@@ -121,7 +126,7 @@ function HeaderMenu() {
           <Menu.List name="openMenu">
             <Menu.Button icon={<FcAbout />}>About us</Menu.Button>
 
-            <Menu.Button
+            {/* <Menu.Button
               icon={isDarkMode ? <BsSun /> : <BsMoon />}
               onClick={toggleDarkMode}
             >
@@ -130,7 +135,7 @@ function HeaderMenu() {
               <span>
                 <i>{isDarkMode ? "On" : "Off"}</i>
               </span>
-            </Menu.Button>
+            </Menu.Button> */}
 
             <Menu.Button
               icon={<VscSettingsGear />}

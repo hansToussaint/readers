@@ -22,7 +22,6 @@ const Input = styled.input`
       }
 
       &:focus {
-        outline: none;
         width: 95%;
       }
     `}
@@ -37,6 +36,10 @@ const Input = styled.input`
     `}
 
       box-shadow: var(--shadow-sm);
+
+  &:focus {
+    outline: none;
+  }
 `;
 
 Input.defaultProps = {

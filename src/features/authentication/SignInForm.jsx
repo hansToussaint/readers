@@ -64,6 +64,10 @@ function SignInForm() {
         </Button>
       </FormRowVertical>
 
+      <Link to="/password-restore">
+        <b>Forgot your password?</b>
+      </Link>
+
       <p>
         Don&apos;t have an account?{" "}
         <Link to="/signUp">
