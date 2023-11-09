@@ -12,7 +12,7 @@ function UpdateAccount() {
   const { user } = useUser();
 
   const email = user?.email;
-  const currentFullName = user?.user_metadata?.fullname;
+  const currentFullName = user?.user_metadata?.fullName;
 
   const { updateUser, isUpdating } = useUpadateUser();
 

@@ -93,6 +93,15 @@ const Notification = styled.span`
   justify-content: center;
 `;
 
+const StyledAvatar = styled.div`
+  & > * {
+    display: flex;
+    gap: 1.2rem;
+    align-items: center;
+    color: var(--color-grey-600);
+  }
+`;
+
 function HeaderMenu() {
   // const { isDarkMode, toggleDarkMode } = useDarkMode();
   const { signOut, isLoading } = useSignOut();
@@ -115,7 +124,9 @@ function HeaderMenu() {
 
       <Li>
         <StyledNavLink to="/account">
-          <UserAvatar />
+          <StyledAvatar>
+            <UserAvatar />
+          </StyledAvatar>
         </StyledNavLink>
       </Li>
 

@@ -1,28 +1,29 @@
 import styled from "styled-components";
+import { useState } from "react";
 import Sidebar from "./SideBar";
 import Heading from "./Heading";
-// import UserAvatar from "../features/authentication/UserAvatar";
-// import Button from "./Button";
-// import UpdateAccount from "../features/authentication/UpdateAccount";
+import UserAvatar from "../features/authentication/UserAvatar";
+import Button from "./Button";
+import UpdateAccount from "../features/authentication/UpdateAccount";
 import AccessAndSecutity from "../features/authentication/AccessAndSecutity";
 import ButtonIcon from "./ButtonIcon";
 
 import { FaKey } from "react-icons/fa";
 import { FiUserX } from "react-icons/fi";
 import { BiChevronRight } from "react-icons/bi";
-import { useState } from "react";
-import Button from "./Button";
+import FormRowVertical from "./FormRowVertical";
+import Input from "./Input";
+import { useUser } from "../features/authentication/useUser";
 
 const StyledAccountSettings = styled.div`
-  width: 100%;
-  height: 100%;
+  /* width: 100%;
+  height: 100%; */
   display: grid;
-  grid-template-columns: 30rem 1fr;
+  grid-template-columns: 32rem 1fr;
   grid-template-rows: auto auto;
 
   gap: 3.5rem;
-  background-color: var(--color-grey-50);
-  /* background-color: red; */
+  /* background-color: var(--color-grey-50); */
 
   padding: 4rem;
 
@@ -32,39 +33,43 @@ const StyledAccountSettings = styled.div`
   }
 `;
 
-// const AccountDiv = styled.div`
-//   /* min-width: 50%; */
-//   display: flex;
-//   flex-direction: column;
-//   gap: 2rem;
+const AccountDiv = styled.div`
+  /* min-width: 50%; */
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 
-//   background-color: var(--color-grey-0);
-//   border: 1px solid var(--color-grey-100);
-//   border-radius: var(--border-radius-md);
-//   box-shadow: var(--shadow-md);
-//   padding: 1.5rem 2.4rem;
-//   /* background-color: red; */
-// `;
+  background-color: var(--color-grey-0);
+  border: 1px solid var(--color-grey-100);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-md);
+  padding: 1.5rem 2.4rem;
 
-// const Profile = styled.div`
-//   display: flex;
-//   justify-content: space-between;
-//   margin-bottom: 1rem;
+  & button {
+    width: max-content;
+    height: max-content;
+  }
+`;
 
-//   & button {
-//     align-self: center;
-//   }
+const Profile = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
 
-//   & img {
-//     height: 13rem;
-//     width: 13rem;
-//   }
+  & button {
+    align-self: center;
+  }
 
-//   & span {
-//     font-size: 2rem;
-//     font-weight: 300;
-//   }
-// `;
+  & img {
+    height: 13rem;
+    width: 13rem;
+  }
+
+  & span {
+    font-size: 2rem;
+    font-weight: 300;
+  }
+`;
 
 const AccessDiv = styled.div`
   /* min-width: 50rem; */
@@ -81,6 +86,7 @@ const AccessDiv = styled.div`
 
 const StyledForButton = styled.div`
   position: relative;
+
   & button {
     width: max-content;
     height: max-content;
@@ -94,29 +100,54 @@ const StyledForButton = styled.div`
 `;
 
 function AccountSettingsLayout() {
+  const { user } = useUser();
+
+  const email = user?.email;
+  const currentFullName = user?.user_metadata?.fullName;
+
   const [isCliked, setIsCliked] = useState(false);
+  const [showEditProfile, setShowEditProfile] = useState(false);
 
   function handleClick() {
     setIsCliked((click) => !click);
+  }
+
+  function handleEditProfile() {
+    setShowEditProfile((show) => !show);
   }
 
   return (
     <StyledAccountSettings>
       <Sidebar />
 
-      {/* <AccountDiv>
+      <AccountDiv>
         <Heading as="h2">Account</Heading>
 
         <Profile>
           <UserAvatar />
-          <Button $variation="secondary">Edit Profile</Button>
+
+          <Button $variation="secondary" onClick={handleEditProfile}>
+            {showEditProfile ? "Cancel" : "Edit Profile"}
+          </Button>
         </Profile>
 
         <div>
           <Heading as="h2">General</Heading>
-          <UpdateAccount />
+          {showEditProfile ? (
+            <UpdateAccount />
+          ) : (
+            <>
+              <FormRowVertical label="Full name">
+                <Input value={currentFullName} disabled />
+              </FormRowVertical>
+
+              <FormRowVertical label="Email address">
+                <Input value={email} disabled />
+              </FormRowVertical>
+            </>
+          )}
         </div>
-      </AccountDiv> */}
+      </AccountDiv>
 
       <AccessDiv>
         <Heading as="h2">Access</Heading>

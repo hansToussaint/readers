@@ -10,7 +10,8 @@ import { AiOutlineSecurityScan } from "react-icons/ai";
 
 const StyledSidebar = styled.aside`
   /* height: 20rem; */
-  /* grid-row: 1 / -1; */
+  grid-row: 1 / -1;
+  max-height: 87rem;
 
   background-color: var(--color-grey-0);
   padding: 3.2rem 2.4rem;
@@ -32,10 +33,23 @@ const StyledSidebar = styled.aside`
   }
 `;
 
+const StyledAvatar = styled.div`
+  & > * {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--color-grey-600);
+
+    gap: 1.2rem;
+  }
+`;
+
 function Sidebar() {
   return (
     <StyledSidebar>
-      <UserAvatar />
+      <StyledAvatar>
+        <UserAvatar />
+      </StyledAvatar>
       <Heading as="h2">Settings</Heading>
 
       <ul>
