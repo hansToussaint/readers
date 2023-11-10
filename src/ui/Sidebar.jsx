@@ -7,6 +7,7 @@ import ButtonIcon from "./ButtonIcon";
 import { BiChevronRight } from "react-icons/bi";
 import { RiAccountCircleLine } from "react-icons/ri";
 import { AiOutlineSecurityScan } from "react-icons/ai";
+// import Logo from "./Logo";
 
 const StyledSidebar = styled.aside`
   /* height: 20rem; */
@@ -47,6 +48,7 @@ const StyledAvatar = styled.div`
 function Sidebar() {
   return (
     <StyledSidebar>
+      {/* <Logo /> */}
       <StyledAvatar>
         <UserAvatar />
       </StyledAvatar>

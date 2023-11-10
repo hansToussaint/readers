@@ -1,7 +1,7 @@
-import ReadBook from "../features/books/ReadBook";
+import BookReader from "../features/books/BookReader";
 
 function Read() {
-  return <ReadBook />;
+  return <BookReader />;
 }
 
 export default Read;

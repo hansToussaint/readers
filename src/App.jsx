@@ -47,6 +47,7 @@ function App() {
               </Route>
 
               <Route path="books/:bookId/read" element={<Read />} />
+
               <Route
                 path="bookmarks"
                 element={
