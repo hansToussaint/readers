@@ -16,6 +16,10 @@ const SignInLayout = styled.main`
   justify-content: center;
   /* gap: 3.2rem; */
   background-color: var(--color-grey-100);
+
+  & p {
+    margin-top: 2rem;
+  }
 `;
 
 function SignIn() {

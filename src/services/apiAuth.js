@@ -31,7 +31,6 @@ export async function signIn({ email, password }) {
 export async function forgotPassword({ email }) {
   const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
     redirectTo: "http://localhost:5173/account",
-    
   });
 
   if (error) throw new Error(error.message);

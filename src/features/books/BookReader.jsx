@@ -33,6 +33,7 @@ function BookReader() {
       <HideHorizontal></HideHorizontal>
       <Iframe
         url="https://www.archive.org/stream/abroadcranethoma00craniala?ui=embed"
+        // url="https://archive.org/stream/chickenlittlerea00rhdi?ui=embed"
         styles={{
           height: "99.2vh",
           width: "100vw",

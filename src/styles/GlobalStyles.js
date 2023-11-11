@@ -19,6 +19,9 @@ const GlobalStyles = createGlobalStyle`
 
    --bg-color-1: rgb(229, 231, 235, 0.2);
    --bg-color-2: rgb(243, 244, 246, 0.2);
+
+   --bg-color-about-1:rgb(107, 114, 128, 0.8);
+   --bg-color-about-2:rgb(17, 24, 39, 0.8);
  
    --color-blue-100: #e0f2fe;
    --color-blue-700: #0369a1;
@@ -62,7 +65,10 @@ const GlobalStyles = createGlobalStyle`
  --color-grey-900: #f9fafb;
 
  --bg-color-1: rgb(55, 65, 81, 0.3);
-   --bg-color-2: rgb(55, 65, 81, 0.2);
+ --bg-color-2: rgb(55, 65, 81, 0.2);
+
+ --bg-color-about-1:rgb(31, 41, 55, 0.9);
+ --bg-color-about-2:rgb(107, 114, 128, 0.8);
  
  --color-blue-100: #075985;
  --color-blue-700: #e0f2fe;

@@ -1,17 +1,16 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 // import { useDarkMode } from "../context/DarkModeContext";
 
 import { BsFillBookmarkStarFill } from "react-icons/bs";
-import { VscSignOut, VscSignIn, VscSettingsGear } from "react-icons/vsc";
-import { FcAbout } from "react-icons/fc";
 
 import UserAvatar from "../features/authentication/UserAvatar";
-import Menu from "./Menu";
+
 import { useSignOut } from "../features/authentication/useSignOut";
 import SpinnerMini from "./SpinnerMini";
 import { useUser } from "../features/authentication/useUser";
+import Button from "./Button";
 
 const StyledHeaderMenu = styled.ul`
   display: flex;
@@ -19,6 +18,21 @@ const StyledHeaderMenu = styled.ul`
   z-index: 10;
 
   align-self: stretch;
+
+  & p,
+  span {
+    font-weight: 500;
+    color: var(--color-grey-500);
+  }
+
+  ${(props) =>
+    props.$type === "root" &&
+    css`
+      & p,
+      span {
+        color: #ffff;
+      }
+    `}
 `;
 
 const Li = styled.li`
@@ -32,7 +46,7 @@ const Li = styled.li`
   padding: 1.2rem 2.4rem;
   cursor: pointer;
 
-  &:hover {
+  &:hover:not(:last-child) {
     color: var(--color-grey-800);
     background-color: var(--color-grey-50);
     border-radius: var(--border-radius-sm);
@@ -51,6 +65,21 @@ const Li = styled.li`
   &.active:visited svg {
     color: var(--color-brand-600);
   }
+
+  & button {
+    font-size: inherit;
+    font-weight: 500;
+    color: var(--color-grey-500);
+  }
+
+  ${(props) =>
+    (props.$type =
+      "root" &&
+      css`
+        &:hover:not(:last-child) {
+          background-color: var(--bg-color-1);
+        }
+      `)}
 `;
 
 const StyledNavLink = styled(NavLink)`
@@ -70,13 +99,14 @@ const StyledNavLink = styled(NavLink)`
     &.active:link,
     &.active:visited {
       color: var(--color-grey-800);
-      background-color: var(--color-grey-50);
+      /* background-color: var(--color-grey-50); */
       border-radius: var(--border-radius-sm);
     }
   }
 `;
 
-const Notification = styled.span`
+const Notification = styled.em`
+  font-style: normal;
   font-size: 1.5rem;
   height: 2rem;
   width: 2rem;
@@ -85,7 +115,7 @@ const Notification = styled.span`
   color: var(--color-grey-100);
 
   position: absolute;
-  top: 1.7rem;
+  top: 0.7rem;
   right: 12.5rem;
 
   display: flex;
@@ -106,38 +136,65 @@ function HeaderMenu() {
   // const { isDarkMode, toggleDarkMode } = useDarkMode();
   const { signOut, isLoading } = useSignOut();
   const { isAuthenticated } = useUser();
-  console.log(isAuthenticated);
 
   const navigate = useNavigate();
 
   const numBookmarks = 2;
 
   return (
-    <StyledHeaderMenu>
-      <Li>
-        <StyledNavLink to="/bookmarks">
-          <BsFillBookmarkStarFill />
-          <Notification>{numBookmarks}</Notification>
-          <span>Bookmarks</span>
+    <StyledHeaderMenu $type={window.location.pathname !== "/" ? "" : "root"}>
+      <Li $type={window.location.pathname !== "/" ? "" : "root"}>
+        <StyledNavLink to="/about">
+          <p>About us</p>
         </StyledNavLink>
       </Li>
 
-      <Li>
-        <StyledNavLink to="/account">
-          <StyledAvatar>
-            <UserAvatar />
-          </StyledAvatar>
-        </StyledNavLink>
-      </Li>
+      {isAuthenticated && (
+        <Li>
+          <StyledNavLink to="/bookmarks">
+            <BsFillBookmarkStarFill />
+            <Notification>{numBookmarks}</Notification>
+            <span>Bookmarks</span>
+          </StyledNavLink>
+        </Li>
+      )}
 
       <Li>
+        {isAuthenticated ? (
+          <StyledNavLink to="/account">
+            <StyledAvatar>
+              <UserAvatar />
+            </StyledAvatar>
+          </StyledNavLink>
+        ) : (
+          <StyledNavLink to="/signin">
+            <p>Sign in</p>
+          </StyledNavLink>
+        )}
+      </Li>
+
+      {isAuthenticated ? (
+        <Li>
+          <Button $variation="secondary" onClick={signOut}>
+            Sign out
+          </Button>
+        </Li>
+      ) : (
+        <Li>
+          <Button $variation="secondary" onClick={() => navigate("/signup")}>
+            {isLoading ? <SpinnerMini /> : "Sign up"}
+          </Button>
+        </Li>
+      )}
+
+      {/* <Li>
         <Menu>
           <Menu.Toggle menuName="openMenu" />
 
           <Menu.List name="openMenu">
             <Menu.Button icon={<FcAbout />}>About us</Menu.Button>
 
-            {/* <Menu.Button
+           <Menu.Button
               icon={isDarkMode ? <BsSun /> : <BsMoon />}
               onClick={toggleDarkMode}
             >
@@ -146,7 +203,7 @@ function HeaderMenu() {
               <span>
                 <i>{isDarkMode ? "On" : "Off"}</i>
               </span>
-            </Menu.Button> */}
+            </Menu.Button> 
 
             <Menu.Button
               icon={<VscSettingsGear />}
@@ -172,7 +229,7 @@ function HeaderMenu() {
             )}
           </Menu.List>
         </Menu>
-      </Li>
+      </Li>  */}
     </StyledHeaderMenu>
   );
 }

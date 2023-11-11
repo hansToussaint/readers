@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import FormSearch from "../ui/FormSearch";
 
 const StyledRoot = styled.div`
@@ -23,6 +23,12 @@ const SeacrhDiv = styled.div`
   height: 10%;
   margin: 15rem auto;
 
+  ${(props) =>
+    props.$type === "root" &&
+    css`
+      margin-top: 35rem;
+    `}
+
   @media screen and (max-width: 1150px) {
     width: 57%;
   }
@@ -31,7 +37,7 @@ const SeacrhDiv = styled.div`
 function Root() {
   return (
     <StyledRoot>
-      <SeacrhDiv>
+      <SeacrhDiv $type={window.location.pathname !== "/" ? "" : "root"}>
         <FormSearch />
       </SeacrhDiv>
     </StyledRoot>

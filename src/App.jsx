@@ -10,7 +10,7 @@ import BookInfo from "./pages/BookInfo";
 import Bookmarks from "./pages/Bookmarks";
 import Account from "./pages/Account";
 import Read from "./pages/Read";
-import Settings from "./pages/Settings";
+import About from "./pages/About";
 import PageNotFound from "./pages/PageNotFound";
 import { DarkModeProvider } from "./context/DarkModeContext";
 import { ViewResultsProvider } from "./context/ViewResultsContext";
@@ -46,7 +46,7 @@ function App() {
                 <Route path="book/:bookId" element={<BookInfo />} />
               </Route>
 
-              <Route path="books/:bookId/read" element={<Read />} />
+              <Route path="/read" element={<Read />} />
 
               <Route
                 path="bookmarks"
@@ -57,10 +57,10 @@ function App() {
                 }
               />
               <Route path="account" element={<Account />} />
-              <Route path="settings" element={<Settings />} />
+              <Route path="about" element={<About />} />
 
-              <Route path="signIn" element={<SignIn />} />
-              <Route path="signUp" element={<SignUp />} />
+              <Route path="signin" element={<SignIn />} />
+              <Route path="signup" element={<SignUp />} />
               <Route path="/password-restore" element={<PasswordRestore />} />
 
               <Route path="*" element={<PageNotFound />} />

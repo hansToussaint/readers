@@ -8,16 +8,16 @@ export function useOrderedBooks() {
   const searchQuery = searchParams.get("query");
 
   //Sort
-  const orderBy = searchParams.get("orderBy") || "relevance";
+  // const orderBy = searchParams.get("orderBy") || "";
 
   //Pagination
-  const page = !searchParams.get("page") ? 1 : Number(searchParams.get("page"));
+  // const page = !searchParams.get("page") ? 1 : Number(searchParams.get("page"));
   // console.log(page);
 
   //Query
   const { isLoading, data, error } = useQuery({
-    queryKey: ["orderedBooks", searchQuery, orderBy, page],
-    queryFn: () => getOrderedBooks(searchQuery, orderBy, page),
+    queryKey: ["books", searchQuery],
+    queryFn: () => getOrderedBooks(searchQuery),
   });
 
   //PRE-FETCHING

@@ -5,11 +5,12 @@ import { useDarkMode } from "../context/DarkModeContext";
 const StyledLogo = styled.div`
   text-align: center;
   /* background-color: red; */
+  padding-left: 2rem;
 `;
 
 const Img = styled.img`
-  height: 7.5rem;
-  width: 20rem;
+  height: 6rem;
+  width: 17rem;
 
   object-fit: cover;
   object-position: center;
@@ -23,7 +24,15 @@ function Logo() {
   return (
     <StyledLogo>
       <Link to="/">
-        <Img src={src} alt="logo" />
+        <Img
+          src={
+            window.location.pathname === "/" ||
+            window.location.pathname === "/about"
+              ? "/logo-dark.png"
+              : src
+          }
+          alt="logo"
+        />
       </Link>
     </StyledLogo>
   );

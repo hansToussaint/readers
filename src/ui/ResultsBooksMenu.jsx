@@ -1,10 +1,10 @@
-import { TfiLayoutGrid3, TfiViewList } from "react-icons/tfi";
-import styled, { css } from "styled-components";
-import { useBooks } from "../features/books/useBooks";
-import { useViewResults } from "../context/ViewResultsContext";
-import OrderBy from "./OrderBy";
-import { useSearchParams } from "react-router-dom";
-import { PAGE_SIZE } from "../utils/contants";
+import styled from "styled-components";
+// import { TfiLayoutGrid3, TfiViewList } from "react-icons/tfi";
+// import { useBooks } from "../features/books/useBooks";
+// import { useViewResults } from "../context/ViewResultsContext";
+// import OrderBy from "./OrderBy";
+// import { useSearchParams } from "react-router-dom";
+// import { PAGE_SIZE } from "../utils/contants";
 
 const StyledMenu = styled.div`
   width: 100%;
@@ -18,59 +18,59 @@ const StyledMenu = styled.div`
   justify-content: space-between;
 `;
 
-const ButtonSVG = styled.button`
-  width: 4.3rem;
-  height: 4.3rem;
-  border: none;
-  background-color: transparent;
-  border-radius: 5px;
+// const ButtonSVG = styled.button`
+//   width: 4.3rem;
+//   height: 4.3rem;
+//   border: none;
+//   background-color: transparent;
+//   border-radius: 5px;
 
-  margin: 0.05rem;
+//   margin: 0.05rem;
 
-  &:focus {
-    outline: none;
-  }
+//   &:focus {
+//     outline: none;
+//   }
 
-  & svg {
-    display: block;
-    margin: 0 auto;
-    text-align: center;
+//   & svg {
+//     display: block;
+//     margin: 0 auto;
+//     text-align: center;
 
-    width: 4.1rem;
-    height: 4.1rem;
-    color: var(--color-grey-400);
-    cursor: pointer;
-    transition: all 0.3s;
+//     width: 4.1rem;
+//     height: 4.1rem;
+//     color: var(--color-grey-400);
+//     cursor: pointer;
+//     transition: all 0.3s;
 
-    padding: 0.8rem 0.6rem;
+//     padding: 0.8rem 0.6rem;
 
-    ${(props) =>
-      props.$active &&
-      css`
-        color: var(--color-brand-500);
-        background-color: var(--color-grey-100);
-        border-radius: var(--border-radius-sm);
-      `}
-  }
-`;
+//     ${(props) =>
+//       props.$active &&
+//       css`
+//         color: var(--color-brand-500);
+//         background-color: var(--color-grey-100);
+//         border-radius: var(--border-radius-sm);
+//       `}
+//   }
+// `;
 
 function ResultsBooksMenu() {
-  const { data, searchQuery } = useBooks();
-  const { isLargeView, largeView, smallView } = useViewResults();
+  // const { data, searchQuery } = useBooks();
+  // const { isLargeView, largeView, smallView } = useViewResults();
 
-  const [searchParams] = useSearchParams();
+  // const [searchParams] = useSearchParams();
 
-  const count = data?.items.length;
-  const currentPage = !searchParams.get("page")
-    ? 1
-    : Number(searchParams.get("page"));
+  // const count = data?.items.length;
+  // const currentPage = !searchParams.get("page")
+  //   ? 1
+  //   : Number(searchParams.get("page"));
 
-  const pageCount = Math.ceil(count / PAGE_SIZE);
-  // console.log(pageCount);
+  // const pageCount = Math.ceil(count / PAGE_SIZE);
+  // // console.log(pageCount);
 
   return (
     <StyledMenu>
-      <div>
+      {/* <div>
         <ButtonSVG $active={isLargeView}>
           <TfiViewList onClick={largeView} />
         </ButtonSVG>
@@ -91,7 +91,7 @@ function ResultsBooksMenu() {
           { value: "relevance", label: "Best Matches" },
           { value: "newest", label: "Publication Date" },
         ]}
-      />
+      /> */}
     </StyledMenu>
   );
 }
