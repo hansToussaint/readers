@@ -22,6 +22,8 @@ const GlobalStyles = createGlobalStyle`
 
    --bg-color-about-1:rgb(107, 114, 128, 0.8);
    --bg-color-about-2:rgb(17, 24, 39, 0.8);
+
+   
  
    --color-blue-100: #e0f2fe;
    --color-blue-700: #0369a1;
@@ -108,6 +110,10 @@ const GlobalStyles = createGlobalStyle`
   --color-brand-900: #312e81;
 
   --color-brand-dark: #232f3e;
+
+  --bg-color-div-1: rgb(21, 128, 61,0.5);
+   --bg-color-div-2: rgb(255, 140, 0, 0.4);
+   --bg-color-div-3: rgb(0, 0, 255, 0.4);
  
    --border-radius-tiny: 3px;
    --border-radius-sm: 5px;
