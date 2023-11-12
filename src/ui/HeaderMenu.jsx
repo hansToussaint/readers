@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 // import { useDarkMode } from "../context/DarkModeContext";
 
@@ -24,15 +24,6 @@ const StyledHeaderMenu = styled.ul`
     font-weight: 500;
     color: var(--color-grey-500);
   }
-
-  ${(props) =>
-    props.$type === "root" &&
-    css`
-      & p,
-      span {
-        color: #ffff;
-      }
-    `}
 `;
 
 const Li = styled.li`
@@ -71,15 +62,6 @@ const Li = styled.li`
     font-weight: 500;
     color: var(--color-grey-500);
   }
-
-  ${(props) =>
-    (props.$type =
-      "root" &&
-      css`
-        &:hover:not(:last-child) {
-          background-color: var(--bg-color-1);
-        }
-      `)}
 `;
 
 const StyledNavLink = styled(NavLink)`
@@ -142,8 +124,8 @@ function HeaderMenu() {
   const numBookmarks = 2;
 
   return (
-    <StyledHeaderMenu $type={window.location.pathname !== "/" ? "" : "root"}>
-      <Li $type={window.location.pathname !== "/" ? "" : "root"}>
+    <StyledHeaderMenu>
+      <Li>
         <StyledNavLink to="/about">
           <p>About us</p>
         </StyledNavLink>

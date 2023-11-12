@@ -1,8 +1,7 @@
 import styled from "styled-components";
 import Heading from "../../ui/Heading";
 import { useNavigate } from "react-router-dom";
-import { format, parseISO } from "date-fns";
-import { formatCurrency } from "../../utils/helpers";
+// import { format, parseISO } from "date-fns";
 
 const StyledBookItemLarge = styled.div`
   width: 100%;
@@ -71,81 +70,44 @@ const DivAbout = styled.div`
   }
 `;
 
-const StyledPrice = styled.div`
-  position: absolute;
-  bottom: 0;
-
-  & span {
-    font-size: 2rem;
-    color: var(--color-yellow-700);
-  }
-
-  & div {
-    /* width: 2rem; */
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-    /* background-color: red; */
-    margin: 1.5rem 0;
-
-    & p:first-child {
-      /* width: 5rem; */
-      border-bottom: 1px solid var(--color-grey-600);
-      padding-right: 15rem;
-    }
-  }
-
-  /* background-color: grey; */
-`;
-
 /*eslint-disable react/prop-types*/
 function BookItemLarge({ book }) {
   const navigate = useNavigate();
 
-  const src = book.volumeInfo.imageLinks.thumbnail;
-  const title = book.volumeInfo.title;
-  const subtitle = book.volumeInfo.subtitle;
-  const author = book.volumeInfo.authors;
-  const date = book.volumeInfo.publishedDate;
-  const summary = book.searchInfo?.textSnippet
-    .replaceAll("&#39;", "'")
-    .replaceAll(".", " ")
-    .replaceAll("<b>", "")
-    .replaceAll("</b>", "");
-
-  const price = book.saleInfo.listPrice?.amount * 0.011;
-  // const currency = book.saleInfo.listPrice?.currencyCode;
-  // const { viewability } = book.accessInfo;
+  // const src = book.volumeInfo.imageLinks.thumbnail;
+  const title = book.title;
+  // const subtitle = book.volumeInfo.subtitle;
+  const author = book.author_name;
+  const date = book.first_publish_year;
+  // const summary = book.searchInfo?.textSnippet
+  //   .replaceAll("&#39;", "'")
+  //   .replaceAll(".", " ")
+  //   .replaceAll("<b>", "")
+  //   .replaceAll("</b>", "");
 
   return (
     <StyledBookItemLarge>
       <Img
-        src={src}
+        // src={src}
         alt="bookImage"
         onClick={() => navigate(`/book/${book.id}`)}
       />
       <InfoBookDiv>
-        <Heading as="h2" onClick={() => navigate(`/book/${book.id}`)}>
+        <Heading as="h2" onClick={() => navigate(`/book/${book.key}`)}>
           {title}
         </Heading>
         <span>
-          by {author} {date && ` | ${format(parseISO(date), "MMM d, Y")}`}
+          {/* by {author} {date && ` | ${format(parseISO(date), "MMM d, Y")}`} */}
+          by {author} {date}
         </span>
-        <Heading as="h3">{subtitle}</Heading>
+        {/* <Heading as="h3">{subtitle}</Heading> */}
         <DivAbout>
           {book.searchInfo && (
             <Heading as="h3">
-              Book Summary: <span>{summary}</span>
+              Book Summary: <span>summary</span>
             </Heading>
           )}
         </DivAbout>
-        <StyledPrice>
-          {/* <div>
-            <p>Available now</p>
-            <p>Viewability: {viewability.replaceAll("_", " ")}</p>
-          </div> */}
-          <span>{price > 0 ? formatCurrency(price) : "FREE"}</span>
-        </StyledPrice>
       </InfoBookDiv>
     </StyledBookItemLarge>
   );

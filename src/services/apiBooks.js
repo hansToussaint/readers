@@ -9,9 +9,9 @@ export async function getOrderedBooks(title) {
       `https://openlibrary.org/search.json?mode=ebooks&has_fulltext=true&q=${title}`
     );
 
-    const data = await response.json();
+    const allData = await response.json();
 
-    // const data = AllData.filter((data) => data.docs.ebook_access === "public");
+    const data = allData.docs;
 
     if (!response.ok)
       throw new Error(`Books could not be loaded (${response.status})`);

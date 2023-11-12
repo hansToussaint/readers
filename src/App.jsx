@@ -38,9 +38,9 @@ function App() {
           <GlobalStyles />
           <BrowserRouter>
             <Routes>
-              <Route element={<AppLayout />}>
-                <Route index element={<Root />} />
+              <Route index element={<Root />} />
 
+              <Route element={<AppLayout />}>
                 <Route path="search" element={<BooksResults />} />
 
                 <Route path="book/:bookId" element={<BookInfo />} />
