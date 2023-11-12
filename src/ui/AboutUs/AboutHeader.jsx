@@ -6,7 +6,7 @@ const Header = styled.header`
   flex-direction: column;
   gap: 5rem;
 
-  height: 75vh;
+  min-height: 75vh;
   background-image: linear-gradient(
       to bottom,
       var(--bg-color-about-1),
@@ -18,6 +18,7 @@ const Header = styled.header`
   position: relative;
 
   padding-top: 4rem;
+  padding-bottom: 2rem;
 
   & p,
   span,
@@ -35,15 +36,15 @@ const Header = styled.header`
   }
 
   @media screen and (max-width: 610px) {
-    height: 95vh;
+    min-height: 95vh;
   }
 
   @media screen and (max-width: 400px) {
-    height: 115vh;
+    min-height: 115vh;
   }
 
   @media screen and (max-width: 315px) {
-    height: 150vh;
+    min-height: 150vh;
   }
 `;
 

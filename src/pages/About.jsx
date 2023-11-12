@@ -8,6 +8,16 @@ import Div2 from "../ui/AboutUs/Div2";
 import Div1 from "../ui/AboutUs/Div1";
 import { moveInRight, moveInleft } from "../ui/AboutUs/Animations";
 import Section2 from "../ui/AboutUs/Section2";
+import Section3 from "../ui/AboutUs/Section3";
+import Form from "../ui/Form";
+import FormRowVertical from "../ui/FormRowVertical";
+import Input from "../ui/Input";
+import Button from "../ui/Button";
+import Textarea from "../ui/Textarea";
+import DivJoinUs from "../ui/AboutUs/DivJoinUS";
+import { useNavigate } from "react-router-dom";
+import ContactDiv from "../ui/AboutUs/ContactDiv";
+import Footer from "../ui/AboutUs/Footer";
 
 export const StyledAbout = styled.div`
   margin: 0;
@@ -50,6 +60,8 @@ const Img = styled.img`
 
 ////////////////////
 function About() {
+  const navigate = useNavigate();
+
   return (
     <StyledAbout>
       <Header>
@@ -140,7 +152,47 @@ function About() {
             </p>
           </div>
         </Section2>
+
+        <Section3>
+          <DivJoinUs>
+            <Heading as="h1">Join us today</Heading>
+
+            <p>
+              Embark on a literary adventure with us today! Dive into a world of
+              captivating stories, insightful knowledge, and endless
+              possibilities
+            </p>
+
+            <Button $size="large" onClick={() => navigate("/signup")}>
+              Sign up
+            </Button>
+          </DivJoinUs>
+
+          <ContactDiv>
+            <Heading as="h2">Contact us</Heading>
+
+            <Form>
+              <FormRowVertical label="Full name">
+                <Input type="text" />
+              </FormRowVertical>
+
+              <FormRowVertical label="Email">
+                <Input type="text" />
+              </FormRowVertical>
+
+              <FormRowVertical label="Message">
+                <Textarea />
+              </FormRowVertical>
+
+              <Button $variation="secondary">Send</Button>
+            </Form>
+          </ContactDiv>
+        </Section3>
       </main>
+
+      <Footer>
+        <div>&copy; readers. All rights reserved.</div>
+      </Footer>
     </StyledAbout>
   );
 }

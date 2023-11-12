@@ -114,6 +114,8 @@ const GlobalStyles = createGlobalStyle`
   --bg-color-div-1: rgb(21, 128, 61,0.5);
    --bg-color-div-2: rgb(255, 140, 0, 0.4);
    --bg-color-div-3: rgb(0, 0, 255, 0.4);
+
+   --color-orange: rgb(255, 140, 0);
  
    --border-radius-tiny: 3px;
    --border-radius-sm: 5px;
