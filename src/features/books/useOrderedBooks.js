@@ -2,10 +2,12 @@ import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "react-router-dom";
 import { getOrderedBooks } from "../../services/apiBooks";
 
-export function useOrderedBooks() {
+export function useOrderedBooks(id) {
   // const queryClient = useQueryClient();
   const [searchParams] = useSearchParams();
   const searchQuery = searchParams.get("query");
+
+  console.log(searchParams.get("bookId"));
 
   //Sort
   // const orderBy = searchParams.get("orderBy") || "";
@@ -17,7 +19,7 @@ export function useOrderedBooks() {
   //Query
   const { isLoading, data, error } = useQuery({
     queryKey: ["books", searchQuery],
-    queryFn: () => getOrderedBooks(searchQuery),
+    queryFn: () => getOrderedBooks(searchQuery || id),
   });
 
   //PRE-FETCHING

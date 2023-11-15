@@ -1,8 +1,9 @@
-import styled from "styled-components";
-// import { TfiLayoutGrid3, TfiViewList } from "react-icons/tfi";
+import styled, { css } from "styled-components";
+import { TfiLayoutGrid3, TfiViewList } from "react-icons/tfi";
 // import { useBooks } from "../features/books/useBooks";
-// import { useViewResults } from "../context/ViewResultsContext";
-// import OrderBy from "./OrderBy";
+import { useViewResults } from "../context/ViewResultsContext";
+import OrderBy from "./OrderBy";
+import { useOrderedBooks } from "../features/books/useOrderedBooks";
 // import { useSearchParams } from "react-router-dom";
 // import { PAGE_SIZE } from "../utils/contants";
 
@@ -18,49 +19,49 @@ const StyledMenu = styled.div`
   justify-content: space-between;
 `;
 
-// const ButtonSVG = styled.button`
-//   width: 4.3rem;
-//   height: 4.3rem;
-//   border: none;
-//   background-color: transparent;
-//   border-radius: 5px;
+const ButtonSVG = styled.button`
+  width: 4.3rem;
+  height: 4.3rem;
+  border: none;
+  background-color: transparent;
+  border-radius: 5px;
 
-//   margin: 0.05rem;
+  margin: 0.05rem;
 
-//   &:focus {
-//     outline: none;
-//   }
+  &:focus {
+    outline: none;
+  }
 
-//   & svg {
-//     display: block;
-//     margin: 0 auto;
-//     text-align: center;
+  & svg {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
 
-//     width: 4.1rem;
-//     height: 4.1rem;
-//     color: var(--color-grey-400);
-//     cursor: pointer;
-//     transition: all 0.3s;
+    width: 4.1rem;
+    height: 4.1rem;
+    color: var(--color-grey-400);
+    cursor: pointer;
+    transition: all 0.3s;
 
-//     padding: 0.8rem 0.6rem;
+    padding: 0.8rem 0.6rem;
 
-//     ${(props) =>
-//       props.$active &&
-//       css`
-//         color: var(--color-brand-500);
-//         background-color: var(--color-grey-100);
-//         border-radius: var(--border-radius-sm);
-//       `}
-//   }
-// `;
+    ${(props) =>
+      props.$active &&
+      css`
+        color: var(--color-brand-500);
+        background-color: var(--color-grey-100);
+        border-radius: var(--border-radius-sm);
+      `}
+  }
+`;
 
 function ResultsBooksMenu() {
-  // const { data, searchQuery } = useBooks();
-  // const { isLargeView, largeView, smallView } = useViewResults();
+  const { data } = useOrderedBooks();
+  const { isLargeView, largeView, smallView } = useViewResults();
 
   // const [searchParams] = useSearchParams();
 
-  // const count = data?.items.length;
+  const count = data?.numFound;
   // const currentPage = !searchParams.get("page")
   //   ? 1
   //   : Number(searchParams.get("page"));
@@ -70,7 +71,7 @@ function ResultsBooksMenu() {
 
   return (
     <StyledMenu>
-      {/* <div>
+      <div>
         <ButtonSVG $active={isLargeView}>
           <TfiViewList onClick={largeView} />
         </ButtonSVG>
@@ -80,18 +81,18 @@ function ResultsBooksMenu() {
         </ButtonSVG>
       </div>
       <p>
-        Showing <span>{(currentPage - 1) * PAGE_SIZE + 1}</span>-
+        {/* Showing <span>{(currentPage - 1) * PAGE_SIZE + 1}</span>-
         <span>
           {currentPage === pageCount ? count : currentPage * PAGE_SIZE}
-        </span>{" "}
-        of {count} results for <i>{searchQuery}</i>
+        </span>{" "} */}
+        of {count} results for <i>{data?.q}</i>
       </p>
       <OrderBy
         options={[
           { value: "relevance", label: "Best Matches" },
           { value: "newest", label: "Publication Date" },
         ]}
-      /> */}
+      />
     </StyledMenu>
   );
 }

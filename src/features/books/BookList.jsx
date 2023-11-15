@@ -35,7 +35,7 @@ function BookList() {
 
   const { isLargeView } = useViewResults();
 
-  console.log(dataOrderedBooks);
+  const orderedBooks = dataOrderedBooks?.docs;
 
   console.log(errorOrderedBooks);
 
@@ -45,13 +45,13 @@ function BookList() {
     <>
       {isLargeView ? (
         <StyledBookList type="large">
-          {dataOrderedBooks?.map((book) => (
+          {orderedBooks?.map((book) => (
             <BookItemLarge book={book} key={book.key} />
           ))}
         </StyledBookList>
       ) : (
         <StyledBookList type="mini">
-          {dataOrderedBooks.map((book) => (
+          {orderedBooks.map((book) => (
             <BookItemMini book={book} key={book.key} />
           ))}
         </StyledBookList>

@@ -1,7 +1,11 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import GlobalStyles from "./styles/GlobalStyles";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { Toaster } from "react-hot-toast";
+import GlobalStyles from "./styles/GlobalStyles";
+
+import { DarkModeProvider } from "./context/DarkModeContext";
+import { ViewResultsProvider } from "./context/ViewResultsContext";
 
 import Root from "./pages/Root";
 import AppLayout from "./ui/AppLayout";
@@ -12,9 +16,7 @@ import Account from "./pages/Account";
 import Read from "./pages/Read";
 import About from "./pages/About";
 import PageNotFound from "./pages/PageNotFound";
-import { DarkModeProvider } from "./context/DarkModeContext";
-import { ViewResultsProvider } from "./context/ViewResultsContext";
-import { Toaster } from "react-hot-toast";
+
 import ProtectedRoute from "./ui/ProtectedRoute";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
@@ -46,7 +48,7 @@ function App() {
                 <Route path="book/:bookId" element={<BookInfo />} />
               </Route>
 
-              <Route path="/read" element={<Read />} />
+              <Route path="book/:readId/read" element={<Read />} />
 
               <Route
                 path="bookmarks"

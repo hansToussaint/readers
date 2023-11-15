@@ -9,9 +9,7 @@ export async function getOrderedBooks(title) {
       `https://openlibrary.org/search.json?mode=ebooks&has_fulltext=true&q=${title}`
     );
 
-    const allData = await response.json();
-
-    const data = allData.docs;
+    const data = await response.json();
 
     if (!response.ok)
       throw new Error(`Books could not be loaded (${response.status})`);
@@ -27,9 +25,7 @@ export async function getOrderedBooks(title) {
 //
 export async function getSingleBook(id) {
   try {
-    const response = await fetch(
-      `https://www.googleapis.com/books/v1/volumes/${id}?`
-    );
+    const response = await fetch(`https://openlibrary.org/works/${id}.json`);
 
     const data = await response.json();
 

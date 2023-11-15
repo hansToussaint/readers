@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Heading from "../../ui/Heading";
 import { useNavigate } from "react-router-dom";
+import { useCoverMedium } from "./useCoverBook";
 // import { format, parseISO } from "date-fns";
 
 const StyledBookItemLarge = styled.div`
@@ -27,8 +28,8 @@ const StyledBookItemLarge = styled.div`
 
 const Img = styled.img`
   display: block;
-  max-width: 100%;
-  max-height: 100%;
+  /* width: 30rem;
+  height: 34.5rem; */
   /* margin: auto; */
   border: 1px solid var(--color-grey-200);
   border-radius: var(--border-radius-tiny);
@@ -74,37 +75,39 @@ const DivAbout = styled.div`
 function BookItemLarge({ book }) {
   const navigate = useNavigate();
 
+  const bookId = book.key.replace("/works/", "");
+
+  const coverId = book?.cover_i;
+  const coverMedium = useCoverMedium(coverId);
+
   // const src = book.volumeInfo.imageLinks.thumbnail;
   const title = book.title;
-  // const subtitle = book.volumeInfo.subtitle;
-  const author = book.author_name;
+  // const average = book.ratings_average;
+  const author = book.author_name?.at(0);
   const date = book.first_publish_year;
-  // const summary = book.searchInfo?.textSnippet
-  //   .replaceAll("&#39;", "'")
-  //   .replaceAll(".", " ")
-  //   .replaceAll("<b>", "")
-  //   .replaceAll("</b>", "");
+  const topics = book.subject?.slice(0, 15).join(", ");
+  // console.log(topics);
 
   return (
     <StyledBookItemLarge>
       <Img
-        // src={src}
+        src={coverMedium}
         alt="bookImage"
-        onClick={() => navigate(`/book/${book.id}`)}
+        onClick={() => navigate(`/book/${bookId}`)}
       />
       <InfoBookDiv>
-        <Heading as="h2" onClick={() => navigate(`/book/${book.key}`)}>
+        <Heading as="h2" onClick={() => navigate(`/book/${bookId}`)}>
           {title}
         </Heading>
         <span>
           {/* by {author} {date && ` | ${format(parseISO(date), "MMM d, Y")}`} */}
-          by {author} {date}
+          by {author ? author : "Unknown"} {date && `, ${date}`}
         </span>
         {/* <Heading as="h3">{subtitle}</Heading> */}
         <DivAbout>
-          {book.searchInfo && (
+          {book.subject && (
             <Heading as="h3">
-              Book Summary: <span>summary</span>
+              Book subject: <span>{topics}</span>
             </Heading>
           )}
         </DivAbout>

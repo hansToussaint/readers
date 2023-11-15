@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 
 export function useBook() {
   const { bookId } = useParams();
+  // console.log(bookId);
 
   const {
     isLoading,

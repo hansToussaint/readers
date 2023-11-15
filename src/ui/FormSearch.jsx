@@ -3,7 +3,7 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { RxCross2 } from "react-icons/rx";
 import styled from "styled-components";
 import Input from "./Input";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 const Form = styled.form`
   display: flex;
@@ -41,6 +41,7 @@ const Reset = styled.div`
   display: flex;
   gap: 1rem;
   justify-content: space-between;
+  cursor: pointer;
 
   & span {
     border-left: 1px solid var(--color-grey-300);
@@ -50,7 +51,11 @@ const Reset = styled.div`
 `;
 
 function FormSearch() {
-  const [search, setSearch] = useState("");
+  const [searchParams] = useSearchParams();
+
+  const [search, setSearch] = useState(
+    searchParams.get("query") ? searchParams.get("query") : ""
+  );
   const query = search.toLowerCase().replaceAll(" ", "+");
 
   const navigate = useNavigate();
@@ -84,9 +89,9 @@ function FormSearch() {
         <>
           {search && (
             <Reset>
-              <button onClick={() => setSearch("")}>
+              <i onClick={() => setSearch("")}>
                 <RxCross2 />
-              </button>
+              </i>
               <span></span>
             </Reset>
           )}

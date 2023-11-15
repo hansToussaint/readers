@@ -1,11 +1,12 @@
 import styled from "styled-components";
 import { useBook } from "./useBook";
 import Spinner from "../../ui/Spinner";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Heading from "../../ui/Heading";
 import Button from "../../ui/Button";
-import { format, parseISO } from "date-fns";
-import { formatCurrency } from "../../utils/helpers";
+// import { format, parseISO } from "date-fns";
+import { useCoverLarge } from "./useCoverBook";
+import { useOrderedBooks } from "./useOrderedBooks";
 
 const StyledBookDetail = styled.div`
   /* width: 100%; */
@@ -16,11 +17,6 @@ const StyledBookDetail = styled.div`
 
 const Img = styled.img`
   width: 45rem;
-`;
-
-const SpanPrice = styled.span`
-  font-size: 2rem;
-  color: var(--color-yellow-700);
 `;
 
 const MainDetail = styled.div`
@@ -116,30 +112,37 @@ const DescriptionHeader = styled.div`
 
 function BookDetail() {
   const navigate = useNavigate();
+  const { bookId } = useParams();
+
+  const { data: oneBook } = useOrderedBooks(bookId);
+  console.log(oneBook);
+
+  const readId = oneBook?.docs.at(0).lending_identifier_s;
+  console.log(readId);
 
   const { book, isLoading } = useBook();
 
-  const image = book?.volumeInfo.imageLinks.thumbnail;
-  const title = book?.volumeInfo.title;
-  const subtitle = book?.volumeInfo.subtitle;
-  const author = book?.volumeInfo.authors;
-  const price = book?.saleInfo.listPrice?.amount * 0.011;
+  const coverId = book?.covers?.at(0);
+  const coverLarge = useCoverLarge(coverId);
 
-  const publisher = book?.volumeInfo.publisher;
-  const date = book?.volumeInfo.publishedDate;
-  const language = book?.volumeInfo.language;
-  const pages = book?.volumeInfo.pageCount;
-  const isbn_10 = book?.volumeInfo.industryIdentifiers.at(0).identifier;
-  const isbn_13 = book?.volumeInfo.industryIdentifiers.at(1).identifier;
-  const topics = book?.volumeInfo.categories;
-  const viewability = book?.accessInfo.viewability;
+  const title = book?.title;
+  // const subtitle = book?.volumeInfo.subtitle;
+  // const author = book?.authors.at(0).;
 
-  const description = book?.volumeInfo.description;
+  // const publisher = book?.volumeInfo.publisher;
+  // const date = book?.volumeInfo.publishedDate;
+  // const language = book?.volumeInfo.language;
+  // const pages = book?.volumeInfo.pageCount;
+  // const isbn_10 = book?.volumeInfo.industryIdentifiers.at(0).identifier;
+  // const isbn_13 = book?.volumeInfo.industryIdentifiers.at(1).identifier;
+  const topics = book?.subjects.join(", ");
+
+  const description = book?.description;
 
   if (isLoading) return <Spinner />;
 
   function handleClick() {
-    navigate(`/books/${book.id}/read`);
+    navigate(`/book/${readId}/read`);
     console.log("click");
   }
 
@@ -148,35 +151,35 @@ function BookDetail() {
       <Heading as="h1">{title}</Heading>
 
       <MainDetail>
-        <Img src={image} alt="img" />
+        <Img src={coverLarge} alt="img" />
         <PublicationDetail>
-          <Heading as="h3">{subtitle}</Heading>
-          <span>by {author}</span>
-          <SpanPrice>{price > 0 ? formatCurrency(price) : "FREE"}</SpanPrice>
+          {/* <Heading as="h3">{subtitle}</Heading> */}
+          {/* <span>by {author}</span> */}
+          {/* <SpanPrice>{price > 0 ? formatCurrency(price) : "FREE"}</SpanPrice> */}
           <List>
             <dt>Publisher</dt>
-            <dd>{publisher}</dd>
+            {/* <dd>{publisher}</dd> */}
 
             <dt>Date</dt>
-            <dd>{date && `${format(parseISO(date), "MMM d, Y")}`}</dd>
+            {/* <dd>{date && `${format(parseISO(date), "MMM d, Y")}`}</dd> */}
 
             <dt>Language</dt>
-            <dd>{language}</dd>
+            {/* <dd>{language}</dd> */}
 
             <dt>Pages</dt>
-            <dd>{pages}</dd>
+            {/* <dd>{pages}</dd> */}
 
             <dt>ISBN-10</dt>
-            <dd>{isbn_10}</dd>
+            {/* <dd>{isbn_10}</dd> */}
 
             <dt>ISBN-13</dt>
-            <dd>{isbn_13}</dd>
+            {/* <dd>{isbn_13}</dd> */}
 
             <dt>Topics</dt>
             <dd>{topics}</dd>
 
             <dt>Viewability</dt>
-            <dd>{viewability}</dd>
+            {/* <dd>{viewability}</dd> */}
           </List>
           <Button onClick={handleClick}>Read Book</Button>
         </PublicationDetail>
