@@ -1,12 +1,12 @@
 // import { PAGE_SIZE } from "../utils/contants";
 
-export async function getOrderedBooks(title) {
+export async function getOrderedBooks(title, sort, page) {
   try {
     // const from = (page - 1) * PAGE_SIZE;
     // const to = from + PAGE_SIZE;
 
     const response = await fetch(
-      `https://openlibrary.org/search.json?mode=ebooks&has_fulltext=true&q=${title}`
+      `https://openlibrary.org/search.json?mode=ebooks&has_fulltext=true&q=${title}&sort=${sort}&page=${page}`
     );
 
     const data = await response.json();

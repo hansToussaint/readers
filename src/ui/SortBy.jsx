@@ -2,12 +2,12 @@ import { useSearchParams } from "react-router-dom";
 import Select from "./Select";
 
 /*eslint-disable react/prop-types */
-function OrderBy({ options }) {
+function SortBy({ options }) {
   const [searchParams, setSearchParams] = useSearchParams();
-  const orderBy = searchParams.get("orderBy") || "";
+  const sort = searchParams.get("sort") || "";
 
   function handleChange(e) {
-    searchParams.set("orderBy", e.target.value);
+    searchParams.set("sort", e.target.value);
     setSearchParams(searchParams);
   }
 
@@ -15,10 +15,10 @@ function OrderBy({ options }) {
     <Select
       type="white"
       options={options}
-      value={orderBy}
+      value={sort}
       onChange={handleChange}
     />
   );
 }
 
-export default OrderBy;
+export default SortBy;

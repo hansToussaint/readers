@@ -24,15 +24,7 @@ function Logo() {
   return (
     <StyledLogo>
       <Link to="/">
-        <Img
-          src={
-            window.location.pathname === "/" ||
-            window.location.pathname === "/about"
-              ? "/logo-dark.png"
-              : src
-          }
-          alt="logo"
-        />
+        <Img src={src} alt="logo" />
       </Link>
     </StyledLogo>
   );

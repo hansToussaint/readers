@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Heading from "../../ui/Heading";
 import { useNavigate } from "react-router-dom";
 import { useCoverMedium } from "./useCoverBook";
+import StarsComponent from "../../ui/StarsComponent";
 // import { format, parseISO } from "date-fns";
 
 const StyledBookItemLarge = styled.div`
@@ -82,7 +83,8 @@ function BookItemLarge({ book }) {
 
   // const src = book.volumeInfo.imageLinks.thumbnail;
   const title = book.title;
-  // const average = book.ratings_average;
+  const average = book.ratings_average;
+  console.log(average);
   const author = book.author_name?.at(0);
   const date = book.first_publish_year;
   const topics = book.subject?.slice(0, 15).join(", ");
@@ -104,6 +106,7 @@ function BookItemLarge({ book }) {
           by {author ? author : "Unknown"} {date && `, ${date}`}
         </span>
         {/* <Heading as="h3">{subtitle}</Heading> */}
+        {average && <StarsComponent starAverage={average} />}
         <DivAbout>
           {book.subject && (
             <Heading as="h3">

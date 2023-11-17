@@ -18,6 +18,10 @@ const SearchDiv = styled.div`
   @media screen and (max-width: 1150px) {
     padding: 2rem 20%;
   }
+
+  @media screen and (max-width: 500px) {
+    padding: 1.2rem;
+  }
 `;
 
 const ResultsDiv = styled.div`
@@ -28,6 +32,10 @@ const ResultsDiv = styled.div`
 
   & h1 {
     align-self: flex-start !important;
+
+    @media screen and (max-width: 750px) {
+      font-size: 1.9rem;
+    }
   }
 
   /* gap: 2rem; */

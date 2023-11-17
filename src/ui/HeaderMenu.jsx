@@ -1,9 +1,11 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-// import { useDarkMode } from "../context/DarkModeContext";
+import { useDarkMode } from "../context/DarkModeContext";
 
-import { BsFillBookmarkStarFill } from "react-icons/bs";
+import { BsFillBookmarkStarFill, BsMoon, BsSun } from "react-icons/bs";
+import { VscSignIn, VscSignOut, VscAccount } from "react-icons/vsc";
+import { FcAbout } from "react-icons/fc";
 
 import UserAvatar from "../features/authentication/UserAvatar";
 
@@ -11,6 +13,8 @@ import { useSignOut } from "../features/authentication/useSignOut";
 import SpinnerMini from "./SpinnerMini";
 import { useUser } from "../features/authentication/useUser";
 import Button from "./Button";
+import { useMediaQuery } from "react-responsive";
+import Menu from "./Menu";
 
 const StyledHeaderMenu = styled.ul`
   display: flex;
@@ -50,10 +54,7 @@ const Li = styled.li`
     transition: all 0.3s;
   }
 
-  &:hover svg,
-  &:active svg,
-  &.active:link svg,
-  &.active:visited svg {
+  &:hover svg {
     color: var(--color-brand-600);
   }
 
@@ -87,23 +88,23 @@ const StyledNavLink = styled(NavLink)`
   }
 `;
 
-const Notification = styled.em`
-  font-style: normal;
-  font-size: 1.5rem;
-  height: 2rem;
-  width: 2rem;
-  border-radius: 50%;
-  background-color: var(--color-red-300);
-  color: var(--color-grey-100);
+// const Notification = styled.em`
+//   font-style: normal;
+//   font-size: 1.5rem;
+//   height: 2rem;
+//   width: 2rem;
+//   border-radius: 50%;
+//   background-color: var(--color-red-300);
+//   color: var(--color-grey-100);
 
-  position: absolute;
-  top: 0.7rem;
-  right: 12.5rem;
+//   position: absolute;
+//   top: 0.7rem;
+//   right: 12.5rem;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+// `;
 
 const StyledAvatar = styled.div`
   & > * {
@@ -115,103 +116,129 @@ const StyledAvatar = styled.div`
 `;
 
 function HeaderMenu() {
-  // const { isDarkMode, toggleDarkMode } = useDarkMode();
+  // RESPONSIVE
+  const isDesktop = useMediaQuery({
+    query: "(min-width: 900px)",
+  });
+  const isMobile = useMediaQuery({ query: "(max-width: 900px)" });
+  const { isDarkMode, toggleDarkMode } = useDarkMode();
+
   const { signOut, isLoading } = useSignOut();
   const { isAuthenticated } = useUser();
 
   const navigate = useNavigate();
 
-  const numBookmarks = 2;
+  // const numBookmarks = 2;
 
   return (
     <StyledHeaderMenu>
-      <Li>
-        <StyledNavLink to="/about">
-          <p>About us</p>
-        </StyledNavLink>
-      </Li>
+      {isDesktop && (
+        <>
+          <Li>
+            <StyledNavLink to="/about">
+              <p>About us</p>
+            </StyledNavLink>
+          </Li>
 
-      {isAuthenticated && (
-        <Li>
-          <StyledNavLink to="/bookmarks">
-            <BsFillBookmarkStarFill />
-            <Notification>{numBookmarks}</Notification>
-            <span>Bookmarks</span>
-          </StyledNavLink>
-        </Li>
-      )}
+          {isAuthenticated && (
+            <Li>
+              <StyledNavLink to="/bookmarks">
+                <BsFillBookmarkStarFill />
+                {/* <Notification>{numBookmarks}</Notification> */}
+                <span>Bookmarks</span>
+              </StyledNavLink>
+            </Li>
+          )}
 
-      <Li>
-        {isAuthenticated ? (
-          <StyledNavLink to="/account">
-            <StyledAvatar>
-              <UserAvatar />
-            </StyledAvatar>
-          </StyledNavLink>
-        ) : (
-          <StyledNavLink to="/signin">
-            <p>Sign in</p>
-          </StyledNavLink>
-        )}
-      </Li>
-
-      {isAuthenticated ? (
-        <Li>
-          <Button $variation="secondary" onClick={signOut}>
-            Sign out
-          </Button>
-        </Li>
-      ) : (
-        <Li>
-          <Button $variation="secondary" onClick={() => navigate("/signup")}>
-            {isLoading ? <SpinnerMini /> : "Sign up"}
-          </Button>
-        </Li>
-      )}
-
-      {/* <Li>
-        <Menu>
-          <Menu.Toggle menuName="openMenu" />
-
-          <Menu.List name="openMenu">
-            <Menu.Button icon={<FcAbout />}>About us</Menu.Button>
-
-           <Menu.Button
-              icon={isDarkMode ? <BsSun /> : <BsMoon />}
-              onClick={toggleDarkMode}
-            >
-              Dark theme
-              <br />
-              <span>
-                <i>{isDarkMode ? "On" : "Off"}</i>
-              </span>
-            </Menu.Button> 
-
-            <Menu.Button
-              icon={<VscSettingsGear />}
-              onClick={() => navigate("/settings")}
-            >
-              Settings
-            </Menu.Button>
-
+          <Li>
             {isAuthenticated ? (
-              <Menu.Button
-                icon={!isLoading ? <VscSignOut /> : <SpinnerMini />}
-                onClick={signOut}
-              >
-                Sign out
-              </Menu.Button>
+              <StyledNavLink to="/account">
+                <StyledAvatar>
+                  <UserAvatar />
+                </StyledAvatar>
+              </StyledNavLink>
             ) : (
-              <Menu.Button
-                icon={<VscSignIn />}
-                onClick={() => navigate("/signIn")}
-              >
-                Sign in
-              </Menu.Button>
+              <StyledNavLink to="/signin">
+                <p>Sign in</p>
+              </StyledNavLink>
             )}
-          </Menu.List>
-        </Menu>
-      </Li>  */}
+          </Li>
+
+          {isAuthenticated ? (
+            <Li>
+              <Button $variation="secondary" onClick={signOut}>
+                Sign out
+              </Button>
+            </Li>
+          ) : (
+            <Li>
+              <Button
+                $variation="secondary"
+                onClick={() => navigate("/signup")}
+              >
+                {isLoading ? <SpinnerMini /> : "Sign up"}
+              </Button>
+            </Li>
+          )}
+        </>
+      )}
+
+      {isMobile && (
+        <Li>
+          <Menu>
+            <Menu.Toggle menuName="openMenu" />
+
+            <Menu.List name="openMenu">
+              <div>
+                <Menu.Button
+                  icon={<FcAbout />}
+                  onClick={() => navigate("/about")}
+                >
+                  About us
+                </Menu.Button>
+
+                <Menu.Button
+                  icon={isDarkMode ? <BsSun /> : <BsMoon />}
+                  onClick={toggleDarkMode}
+                >
+                  Dark theme
+                  <br />
+                  <span>
+                    <i>{isDarkMode ? "On" : "Off"}</i>
+                  </span>
+                </Menu.Button>
+
+                {isAuthenticated && (
+                  <Menu.Button
+                    icon={<VscAccount />}
+                    onClick={() => navigate("/account")}
+                  >
+                    Account
+                  </Menu.Button>
+                )}
+              </div>
+
+              <div>
+                {isAuthenticated ? (
+                  <Menu.Button
+                    icon={!isLoading ? <VscSignOut /> : <SpinnerMini />}
+                    onClick={signOut}
+                  >
+                    Sign out
+                  </Menu.Button>
+                ) : (
+                  <Menu.Button
+                    icon={<VscSignIn />}
+                    onClick={() => navigate("/signin")}
+                  >
+                    Sign in
+                  </Menu.Button>
+                )}
+              </div>
+            </Menu.List>
+          </Menu>
+        </Li>
+      )}
     </StyledHeaderMenu>
   );
 }

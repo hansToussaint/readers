@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { BsChevronUp } from "react-icons/bs";
 import { useEffect, useState } from "react";
+import { goUp } from "../hooks/useGoUp";
 
 const StyledButtonScroll = styled.button`
   z-index: 10;
@@ -43,13 +44,6 @@ function ScrollToTop() {
       }
     });
   }, []);
-
-  function goUp() {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  }
 
   return (
     <>

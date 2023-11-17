@@ -19,6 +19,9 @@ const StyledBookItemMini = styled.div`
 
   background-color: var(--color-grey-50);
 
+  border: 1px solid var(--color-grey-50);
+  border-radius: var(--border-radius-tiny);
+
   &:hover {
     box-shadow: var(--shadow-lg);
   }

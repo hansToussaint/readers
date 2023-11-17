@@ -48,7 +48,14 @@ function App() {
                 <Route path="book/:bookId" element={<BookInfo />} />
               </Route>
 
-              <Route path="book/:readId/read" element={<Read />} />
+              <Route
+                path="book/:readId/read"
+                element={
+                  <ProtectedRoute>
+                    <Read />
+                  </ProtectedRoute>
+                }
+              />
 
               <Route
                 path="bookmarks"

@@ -3,8 +3,10 @@ import BookItemLarge from "./BookItemLarge";
 import BookItemMini from "./BookItemMini";
 import Spinner from "../../ui/Spinner";
 import { useViewResults } from "../../context/ViewResultsContext";
-// import Pagination from "../../ui/Pagination";
+import Pagination from "../../ui/Pagination";
 import { useOrderedBooks } from "./useOrderedBooks";
+import Empty from "../../ui/Empty";
+import { useMediaQuery } from "react-responsive";
 
 const StyledBookList = styled.div`
   width: 100%;
@@ -27,23 +29,37 @@ const StyledBookList = styled.div`
 `;
 
 function BookList() {
+  //RESPONSIVE
+  const isDesktop = useMediaQuery({
+    query: "(min-width: 900px)",
+  });
+
+  const isTabletOrMobile = useMediaQuery({ query: "(max-width: 900px)" });
+
   const {
     isLoading: isLoadingOrderedBooks,
     data: dataOrderedBooks,
-    error: errorOrderedBooks,
+    // error: errorOrderedBooks,
   } = useOrderedBooks();
 
   const { isLargeView } = useViewResults();
 
-  const orderedBooks = dataOrderedBooks?.docs;
+  const orderedBooks = dataOrderedBooks?.docs.filter(
+    (book) => book.ebook_access === "public"
+  );
 
-  console.log(errorOrderedBooks);
+  if (orderedBooks === "[]") return <Empty resourceName="Books" />;
+
+  // console.log(errorOrderedBooks);
+
+  //PAGINATION
+  const count = dataOrderedBooks?.numFound;
 
   if (isLoadingOrderedBooks) return <Spinner />;
 
   return (
     <>
-      {isLargeView ? (
+      {isDesktop && isLargeView ? (
         <StyledBookList type="large">
           {orderedBooks?.map((book) => (
             <BookItemLarge book={book} key={book.key} />
@@ -56,7 +72,16 @@ function BookList() {
           ))}
         </StyledBookList>
       )}
-      {/* <Pagination count={count} /> */}
+
+      {isTabletOrMobile && (
+        <StyledBookList type="mini">
+          {orderedBooks.map((book) => (
+            <BookItemMini book={book} key={book.key} />
+          ))}
+        </StyledBookList>
+      )}
+
+      <Pagination count={count} />
     </>
   );
 }

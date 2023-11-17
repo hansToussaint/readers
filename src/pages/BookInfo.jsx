@@ -11,6 +11,10 @@ const SearchDiv = styled.div`
   @media screen and (max-width: 1150px) {
     padding: 2rem 20%;
   }
+
+  @media screen and (max-width: 500px) {
+    padding: 2rem 1%;
+  }
 `;
 
 const InfoDiv = styled.div`

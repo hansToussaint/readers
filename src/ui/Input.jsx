@@ -6,7 +6,7 @@ const Input = styled.input`
     css`
       font-family: inherit;
       font-size: 1.9rem;
-      background-color: var(--color-grey-100);
+      background-color: var(--color-grey-200);
       color: var(--color-grey-600);
       border: none;
       border-radius: 100px;
@@ -23,6 +23,12 @@ const Input = styled.input`
 
       &:focus {
         width: 95%;
+      }
+
+      @media screen and (max-width: 950px) {
+        height: 4.5rem;
+        font-size: 1.5rem;
+        padding: 0.7rem 12rem 0.7rem 1.5rem;
       }
     `}
 

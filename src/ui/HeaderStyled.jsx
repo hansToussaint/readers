@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 const variations = {
   root: css`
     padding: 1.2rem 2%;
-    margin-top: 7rem;
+    /* margin-top: 7rem; */
     background-color: transparent;
   `,
 

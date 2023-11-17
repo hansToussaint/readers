@@ -1,5 +1,5 @@
 function Bookmarks() {
-  return <div>Bookmarks</div>;
+  return <div></div>;
 }
 
 export default Bookmarks;

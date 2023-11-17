@@ -2,8 +2,10 @@ import styled, { css } from "styled-components";
 import { TfiLayoutGrid3, TfiViewList } from "react-icons/tfi";
 // import { useBooks } from "../features/books/useBooks";
 import { useViewResults } from "../context/ViewResultsContext";
-import OrderBy from "./OrderBy";
+import SortBy from "./SortBy";
 import { useOrderedBooks } from "../features/books/useOrderedBooks";
+import Empty from "./Empty";
+import { useMediaQuery } from "react-responsive";
 // import { useSearchParams } from "react-router-dom";
 // import { PAGE_SIZE } from "../utils/contants";
 
@@ -56,10 +58,19 @@ const ButtonSVG = styled.button`
 `;
 
 function ResultsBooksMenu() {
+  // RESPONSIVE
+  const isDesktop = useMediaQuery({
+    query: "(min-width: 900px)",
+  });
+
+  // const isTabletOrMobile = useMediaQuery({ query: "(max-width: 900px)" });
+
   const { data } = useOrderedBooks();
   const { isLargeView, largeView, smallView } = useViewResults();
 
   // const [searchParams] = useSearchParams();
+
+  const noData = JSON.stringify(data) === "{}";
 
   const count = data?.numFound;
   // const currentPage = !searchParams.get("page")
@@ -69,28 +80,33 @@ function ResultsBooksMenu() {
   // const pageCount = Math.ceil(count / PAGE_SIZE);
   // // console.log(pageCount);
 
+  if (noData) return <Empty resourceName="results" />;
+
   return (
     <StyledMenu>
-      <div>
-        <ButtonSVG $active={isLargeView}>
-          <TfiViewList onClick={largeView} />
-        </ButtonSVG>
+      {isDesktop && (
+        <div>
+          <ButtonSVG $active={isLargeView}>
+            <TfiViewList onClick={largeView} />
+          </ButtonSVG>
 
-        <ButtonSVG $active={!isLargeView}>
-          <TfiLayoutGrid3 onClick={smallView} />
-        </ButtonSVG>
-      </div>
+          <ButtonSVG $active={!isLargeView}>
+            <TfiLayoutGrid3 onClick={smallView} />
+          </ButtonSVG>
+        </div>
+      )}
       <p>
         {/* Showing <span>{(currentPage - 1) * PAGE_SIZE + 1}</span>-
         <span>
           {currentPage === pageCount ? count : currentPage * PAGE_SIZE}
         </span>{" "} */}
-        of {count} results for <i>{data?.q}</i>
+        Found {count} results for <i>{data?.q}</i>
       </p>
-      <OrderBy
+      <SortBy
         options={[
-          { value: "relevance", label: "Best Matches" },
-          { value: "newest", label: "Publication Date" },
+          { value: "random", label: "Random" },
+          { value: "new", label: "Publication Date" },
+          { value: "rating", label: "Average" },
         ]}
       />
     </StyledMenu>

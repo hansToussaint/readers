@@ -1,41 +1,43 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useSearchParams } from "react-router-dom";
 import { getOrderedBooks } from "../../services/apiBooks";
+import { PAGE_SIZE } from "../../utils/contants";
 
 export function useOrderedBooks(id) {
-  // const queryClient = useQueryClient();
+  const queryClient = useQueryClient();
   const [searchParams] = useSearchParams();
   const searchQuery = searchParams.get("query");
 
-  console.log(searchParams.get("bookId"));
-
   //Sort
-  // const orderBy = searchParams.get("orderBy") || "";
+  const sort = searchParams.get("sort") || "";
 
   //Pagination
-  // const page = !searchParams.get("page") ? 1 : Number(searchParams.get("page"));
+  const page = !searchParams.get("page") ? 1 : Number(searchParams.get("page"));
   // console.log(page);
 
   //Query
   const { isLoading, data, error } = useQuery({
-    queryKey: ["books", searchQuery],
-    queryFn: () => getOrderedBooks(searchQuery || id),
+    queryKey: ["books", searchQuery, sort, page],
+    queryFn: () => getOrderedBooks(searchQuery || id, sort, page),
   });
 
-  //PRE-FETCHING
-  // const pageCount = Math.ceil();
-  // if (page < pageCount)
-  // queryClient.prefetchQuery({
-  //   queryKey: ["orderedBooks", searchQuery, orderBy, page + 1],
-  //   queryFn: () => getOrderedBooks(searchQuery, orderBy, page + 1),
-  // });
+  const count = data?.numFound;
 
-  // //
-  // // if (page < pageCount)
-  // queryClient.prefetchQuery({
-  //   queryKey: ["orderedBooks", searchQuery, orderBy, page - 1],
-  //   queryFn: () => getOrderedBooks(searchQuery, orderBy, page - 1),
-  // });
+  //PRE-FETCHING
+  const pageCount = Math.ceil(count / PAGE_SIZE);
+
+  if (page < pageCount)
+    queryClient.prefetchQuery({
+      queryKey: ["books", searchQuery, sort, page + 1],
+      queryFn: () => getOrderedBooks(searchQuery, sort, page + 1),
+    });
+
+  //
+  if (page > pageCount)
+    queryClient.prefetchQuery({
+      queryKey: ["books", searchQuery, sort, page - 1],
+      queryFn: () => getOrderedBooks(searchQuery, sort, page - 1),
+    });
 
   return { isLoading, data, error };
 }
