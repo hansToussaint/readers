@@ -116,7 +116,8 @@ const GlobalStyles = createGlobalStyle`
    --bg-color-div-3: rgb(0, 0, 255, 0.4);
 
    --color-orange: rgb(255, 140, 0);
- 
+   --color-stars: #fcc419;
+    
    --border-radius-tiny: 3px;
    --border-radius-sm: 5px;
    --border-radius-md: 7px;
@@ -147,6 +148,11 @@ body {
    min-height: 100vh;
    line-height: 1.5;
    font-size: 1.6rem;
+
+   @media screen and (max-width: 800px) {
+    font-size: 1.4rem;
+
+  }
 }
 
 input,

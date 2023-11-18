@@ -1,22 +1,29 @@
 import { createContext, useContext, useState } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
-import styled from "styled-components";
-import { useOutsideClick } from "../hooks/useClickOutside";
+import styled, { keyframes } from "styled-components";
+// import { useOutsideClick } from "../hooks/useClickOutside";
 
-// const Menu = styled.div`
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-// `;
+const smoothMove = keyframes`
+0%{
+  /* opacity: 0.7; */
+  transform: translateX(20rem);
+        
+}
+100% {
+        opacity: 1;
+        transform: translate(0);
+    }
+`;
 
-const StyledToggle = styled.button`
+const StyledOpen = styled.button`
   background: none;
   border: none;
   padding: 0;
   border-radius: var(--border-radius-sm);
   transition: all 0.8s;
 
-  &:focus {
+  &:focus,
+  &:active {
     outline: none;
   }
 
@@ -31,6 +38,7 @@ const StyledList = styled.ul`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  /* transition: all 0.8s; */
 
   position: fixed;
   width: 100%;
@@ -38,7 +46,9 @@ const StyledList = styled.ul`
 
   /* right: ; */
   top: 0;
-  left: 10%;
+  bottom: 0;
+  left: 15%;
+  animation: ${smoothMove} 0.8s ease-in-out;
 
   background-color: var(--color-grey-50);
   box-shadow: var(--shadow-lg);
@@ -47,6 +57,18 @@ const StyledList = styled.ul`
   & > :last-child {
     border-top: 1px solid var(--color-grey-200);
   }
+`;
+
+const CloseDiv = styled.div`
+  background-color: orangered;
+  background-color: var(--bg-color-1);
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  right: 20%;
+
+  animation: ${smoothMove} 0.4s ease-in-out;
 `;
 
 const StyledButton = styled.button`
@@ -107,8 +129,8 @@ function Menu({ children }) {
   );
 }
 
-function Toggle({ menuName }) {
-  const { open, openName, close } = useContext(MenuContext);
+function Open({ menuName }) {
+  const { open } = useContext(MenuContext);
 
   function handleClick(e) {
     e.stopPropagation();
@@ -120,23 +142,29 @@ function Toggle({ menuName }) {
     //   y: clickPosition.y + clickPosition.height + 8,
     // });
 
-    openName === "" ? open(menuName) : close();
+    open(menuName);
   }
 
   return (
-    <StyledToggle onClick={handleClick}>
+    <StyledOpen onClick={handleClick}>
       <AiOutlineMenu />
-    </StyledToggle>
+    </StyledOpen>
   );
 }
 
 function List({ name, children }) {
   const { openName, close } = useContext(MenuContext);
-  const ref = useOutsideClick(close, false);
+  // const ref = useOutsideClick(close, false);
+  // const ref =
 
   if (name !== openName) return null;
 
-  return <StyledList ref={ref}>{children}</StyledList>;
+  return (
+    <>
+      <CloseDiv onClick={close}></CloseDiv>
+      <StyledList>{children}</StyledList>
+    </>
+  );
 }
 
 function Button({ children, icon, onClick }) {
@@ -157,7 +185,7 @@ function Button({ children, icon, onClick }) {
 }
 
 // props
-Menu.Toggle = Toggle;
+Menu.Open = Open;
 Menu.List = List;
 Menu.Button = Button;
 

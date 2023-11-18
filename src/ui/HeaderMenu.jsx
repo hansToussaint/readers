@@ -186,7 +186,7 @@ function HeaderMenu() {
       {isMobile && (
         <Li>
           <Menu>
-            <Menu.Toggle menuName="openMenu" />
+            <Menu.Open menuName="openMenu" />
 
             <Menu.List name="openMenu">
               <div>

@@ -32,6 +32,10 @@ const StyledSidebar = styled.aside`
   & span {
     font-weight: 300;
   }
+
+  @media screen and (max-width: 850px) {
+    display: none;
+  }
 `;
 
 const StyledAvatar = styled.div`

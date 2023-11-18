@@ -84,7 +84,6 @@ function BookItemLarge({ book }) {
   // const src = book.volumeInfo.imageLinks.thumbnail;
   const title = book.title;
   const average = book.ratings_average;
-  console.log(average);
   const author = book.author_name?.at(0);
   const date = book.first_publish_year;
   const topics = book.subject?.slice(0, 15).join(", ");

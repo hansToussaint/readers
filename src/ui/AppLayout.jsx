@@ -11,6 +11,10 @@ const StyledAppLayout = styled.div`
 const Main = styled.main`
   background-color: var(--color-grey-50);
   padding: 2.4rem;
+
+  @media screen and (max-width: 800px) {
+    padding: 1.4rem;
+  }
 `;
 
 function AppLayout() {

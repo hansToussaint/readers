@@ -20,7 +20,7 @@ import PageNotFound from "./pages/PageNotFound";
 import ProtectedRoute from "./ui/ProtectedRoute";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
-import PasswordRestore from "./features/authentication/passwordRestore";
+import PasswordForget from "./pages/PasswordForget";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -70,7 +70,7 @@ function App() {
 
               <Route path="signin" element={<SignIn />} />
               <Route path="signup" element={<SignUp />} />
-              <Route path="/password-restore" element={<PasswordRestore />} />
+              <Route path="/password-restore" element={<PasswordForget />} />
 
               <Route path="*" element={<PageNotFound />} />
             </Routes>

@@ -33,7 +33,7 @@ const Img = styled.img`
   box-shadow: var(--shadow-md);
 
   @media screen and (max-width: 900px) {
-    width: auto;
+    width: 30rem;
   }
 `;
 
@@ -43,14 +43,14 @@ const MainDetail = styled.div`
   /* position: relative; */
 
   @media screen and (max-width: 800px) {
-    width: 100vw;
+    width: 90vw;
   }
 `;
 
 const PublicationDetail = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.4rem;
 
   /* height: 55rem;
   width: 100%;
@@ -155,6 +155,7 @@ function BookDetail() {
   const isbn = resultSearchSingleBook?.isbn?.at(0);
 
   const average = resultSearchSingleBook?.ratings_average;
+  console.log(average);
   const coverId = resultSearchSingleBook?.cover_i;
 
   //

@@ -26,8 +26,11 @@ const StyledHeader = styled.header`
   justify-items: center;
 
   @media screen and (max-width: 1150px) {
-    /* background-color: red; */
     padding: 1.2rem 0;
+  }
+
+  @media screen and (max-width: 550px) {
+    height: 6.5rem;
   }
 
   ${(props) => variations[props.$variation]}

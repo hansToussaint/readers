@@ -6,6 +6,10 @@ const StyledLogo = styled.div`
   text-align: center;
   /* background-color: red; */
   padding-left: 2rem;
+
+  @media screen and (max-width: 550px) {
+    padding: 0;
+  }
 `;
 
 const Img = styled.img`
@@ -14,6 +18,12 @@ const Img = styled.img`
 
   object-fit: cover;
   object-position: center;
+
+  @media screen and (max-width: 550px) {
+    height: 5rem;
+
+    width: 14.5rem;
+  }
 `;
 
 function Logo() {
@@ -24,7 +34,10 @@ function Logo() {
   return (
     <StyledLogo>
       <Link to="/">
-        <Img src={src} alt="logo" />
+        <Img
+          src={window.location.pathname === "/about" ? "/logo-dark.png" : src}
+          alt="logo"
+        />
       </Link>
     </StyledLogo>
   );

@@ -31,6 +31,16 @@ const StyledAccountSettings = styled.div`
     border-bottom: 2px solid var(--color-grey-200);
     padding-bottom: 1rem;
   }
+
+  @media screen and (max-width: 850px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  @media screen and (max-width: 500px) {
+    padding: 1rem;
+  }
 `;
 
 const AccountDiv = styled.div`
@@ -69,6 +79,12 @@ const Profile = styled.div`
     font-size: 2rem;
     font-weight: 300;
   }
+
+  @media screen and (max-width: 500px) {
+    align-items: center;
+    flex-direction: column;
+  }
+  gap: 2rem;
 `;
 
 const AccessDiv = styled.div`

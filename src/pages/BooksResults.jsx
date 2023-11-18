@@ -21,6 +21,7 @@ const SearchDiv = styled.div`
 
   @media screen and (max-width: 500px) {
     padding: 1.2rem;
+    margin: -1.4rem -1.4rem 1.5rem;
   }
 `;
 

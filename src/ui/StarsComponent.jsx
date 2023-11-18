@@ -1,6 +1,23 @@
+import styled from "styled-components";
+
 import { IoStar } from "react-icons/io5";
 import { IoStarHalf } from "react-icons/io5";
 import { IoStarOutline } from "react-icons/io5";
+
+const StarsBox = styled.div`
+  width: max-content;
+  display: flex;
+  /* background-color: red; */
+  gap: 0.3rem;
+
+  padding: 0.5rem;
+
+  & svg {
+    width: 2.4rem;
+    height: 2.4rem;
+    color: var(--color-stars);
+  }
+`;
 
 /*eslint-disable react/prop-types */
 function StarsComponent({ starAverage }) {
@@ -22,6 +39,8 @@ function StarsComponent({ starAverage }) {
     }
   }
 
+  console.log(starArr);
+
   //   const stars = starArr.map((val, i) => {
   //     return <div key={i}
   //       className={style.starBox}
@@ -30,17 +49,17 @@ function StarsComponent({ starAverage }) {
   //     })
 
   return (
-    <>
+    <StarsBox>
       {starArr.map((star, i) => {
-        if (star > 1) {
-          <IoStar key={i} />;
-        } else if (star < 1 && star > 0) {
-          <IoStarHalf key={i} />;
-        } else if (star === 0) {
-          <IoStarOutline key={i} />;
-        }
+        return (
+          <div key={i}>
+            {star === 1 && <IoStar />}
+            {star < 1 && star > 0 && <IoStarHalf />}
+            {star === 0 && <IoStarOutline />}
+          </div>
+        );
       })}
-    </>
+    </StarsBox>
   );
 }
 
