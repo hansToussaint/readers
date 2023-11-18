@@ -3,10 +3,14 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 
 const StyledBookReader = styled.div`
-  max-width: 100vw;
-  max-height: 100vh;
+  max-width: 99%;
+  max-height: 99%;
   overflow: hidden;
   background-color: #333;
+
+  @media screen and (max-width: 500px) {
+    max-height: 98vh;
+  }
 `;
 
 const HideVertical = styled.div`
@@ -17,7 +21,7 @@ const HideVertical = styled.div`
   width: 5.6rem;
   /* max-height: 91vh; */
   z-index: 0;
-  background-color: black;
+  background-color: #333;
 `;
 
 const HideHorizontal = styled.div`
