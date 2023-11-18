@@ -11,11 +11,12 @@ const StyledBookReader = styled.div`
 
 const HideVertical = styled.div`
   position: absolute;
-  top: 3.5vh;
-  bottom: 5.6vh;
+  /* top: 3.5vh;
+  bottom: 5.6vh; */
+  height: 95vh;
   width: 5.6rem;
   /* max-height: 91vh; */
-  z-index: 1;
+  z-index: 0;
   background-color: black;
 `;
 
