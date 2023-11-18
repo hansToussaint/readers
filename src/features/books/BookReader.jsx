@@ -13,7 +13,7 @@ const HideVertical = styled.div`
   position: absolute;
   /* top: 3.5vh;
   bottom: 5.6vh; */
-  height: 94vh;
+  height: 93.6vh;
   width: 5.6rem;
   /* max-height: 91vh; */
   z-index: 0;
