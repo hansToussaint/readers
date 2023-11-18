@@ -70,7 +70,7 @@ function SignInForm() {
 
       <p>
         Don&apos;t have an account?{" "}
-        <Link to="/signUp">
+        <Link to="/signup">
           <b>Sign up</b>
         </Link>
       </p>
