@@ -14,7 +14,7 @@ import FormRowVertical from "../ui/FormRowVertical";
 import Input from "../ui/Input";
 import Button from "../ui/Button";
 import Textarea from "../ui/Textarea";
-import DivJoinUs from "../ui/AboutUs/DivJoinUS";
+import DivJoinUs from "../ui/AboutUs/DivJoinUs";
 import { useNavigate } from "react-router-dom";
 import ContactDiv from "../ui/AboutUs/ContactDiv";
 import Footer from "../ui/AboutUs/Footer";
