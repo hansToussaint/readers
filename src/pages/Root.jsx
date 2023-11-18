@@ -92,7 +92,7 @@ const SeacrhDiv = styled.div`
   /* margin: 20rem auto; */
 
   @media screen and (max-width: 1150px) {
-    margin-top: 0;
+    margin-top: 6rem;
     width: 80%;
   }
 

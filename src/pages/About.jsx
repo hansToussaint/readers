@@ -62,6 +62,12 @@ const Img = styled.img`
 
 ////////////////////
 function About() {
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    console.log("contact");
+  }
+
   const navigate = useNavigate();
 
   return (
@@ -173,7 +179,7 @@ function About() {
           <ContactDiv>
             <Heading as="h2">Contact us</Heading>
 
-            <Form>
+            <Form onSubmit={handleSubmit}>
               <FormRowVertical label="Full name">
                 <Input type="text" />
               </FormRowVertical>
