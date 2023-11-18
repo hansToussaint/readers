@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useState } from "react";
-import Sidebar from "./SideBar";
+import Sidebar from "./Sidebar";
 import Heading from "./Heading";
 import UserAvatar from "../features/authentication/UserAvatar";
 import Button from "./Button";
