@@ -10,8 +10,8 @@ import Heading from "../../ui/Heading";
 import Logo from "../../ui/Logo";
 
 function SignInForm() {
-  const [email, setEmail] = useState("hans@example.com");
-  const [password, setPassword] = useState("password");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const { signIn, isLoading } = useSignIn();
 

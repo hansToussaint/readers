@@ -5,7 +5,7 @@ const Section1 = styled.section`
   background-color: var(--color-grey-100);
   padding: 20rem 15rem;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   grid-gap: 10rem;
 
   & div {
@@ -26,12 +26,17 @@ const Section1 = styled.section`
     letter-spacing: 0.1rem;
   }
 
-  @media screen and (max-width: 1700px) {
+  @media screen and (max-width: 1350px) {
+    padding: 20rem 8rem;
+  }
+
+  @media screen and (max-width: 1200px) {
     grid-template-columns: 500px;
     justify-content: center;
   }
 
   @media screen and (max-width: 600px) {
+    font-size: 1.6rem;
     display: flex;
     flex-direction: column;
     gap: 15rem;

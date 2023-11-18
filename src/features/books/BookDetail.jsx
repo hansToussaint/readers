@@ -28,7 +28,8 @@ const StyledBookDetail = styled.div`
 `;
 
 const Img = styled.img`
-  width: 45rem;
+  width: 40rem;
+  /* max-height: 90%; */
 
   box-shadow: var(--shadow-md);
 
