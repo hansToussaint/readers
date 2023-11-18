@@ -6,8 +6,8 @@ import HeaderMenu from "../ui/HeaderMenu";
 import { useDarkMode } from "../context/DarkModeContext";
 
 const StyledRoot = styled.div`
-  width: 100vw;
-  height: 100vh;
+  /* width: 100%;
+  height: 100%; */
   padding: 1.2rem 0;
 
   display: grid;
