@@ -6,6 +6,10 @@ const Header = styled.header`
   background-image: url("/header-image-2.jpg");
   background-size: cover;
   background-position: top;
+
+  @media screen and (max-width: 500px) {
+    min-height: 10vh;
+  }
 `;
 
 const SignInLayout = styled.main`
@@ -19,6 +23,12 @@ const SignInLayout = styled.main`
 
   & p {
     margin-top: 2rem;
+  }
+
+  @media screen and (max-width: 500px) {
+    min-height: 90vh;
+    padding: 2rem;
+    grid-template-columns: auto;
   }
 `;
 

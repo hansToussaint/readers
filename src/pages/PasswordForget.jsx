@@ -9,6 +9,10 @@ const Styled = styled.div`
   justify-content: center;
   /* gap: 3.2rem; */
   background-color: var(--color-grey-100);
+
+  @media screen and (max-width: 500px) {
+    grid-template-columns: auto;
+  }
 `;
 
 function PasswordForget() {

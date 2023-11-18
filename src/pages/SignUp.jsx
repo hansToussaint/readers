@@ -9,6 +9,11 @@ const SignUpLayout = styled.main`
   justify-content: center;
   /* gap: 3.2rem; */
   background-color: var(--color-grey-100);
+
+  @media screen and (max-width: 500px) {
+    padding: 2rem;
+    grid-template-columns: auto;
+  }
 `;
 
 function SignUp() {

@@ -31,7 +31,7 @@ function PasswordRestore() {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <Heading as="h1">Enter your email:</Heading>
+      <Heading as="h4">Enter your email:</Heading>
 
       <Input
         type="email"
