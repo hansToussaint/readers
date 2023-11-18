@@ -19,6 +19,8 @@ import { useNavigate } from "react-router-dom";
 import ContactDiv from "../ui/AboutUs/ContactDiv";
 import Footer from "../ui/AboutUs/Footer";
 
+//to verify
+
 export const StyledAbout = styled.div`
   margin: 0;
   padding: 0;
