@@ -34,6 +34,10 @@ const Form = styled.form`
     color: var(--color-grey-400);
     transition: all 0.3s;
   }
+
+  @media screen and (max-width: 450px) {
+    margin-right: 1rem;
+  }
 `;
 
 const Reset = styled.div`

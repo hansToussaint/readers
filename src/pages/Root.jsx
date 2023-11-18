@@ -12,7 +12,7 @@ const StyledRoot = styled.div`
 
   display: grid;
   grid-template-rows: auto auto 1fr;
-  height: 100dvh;
+  height: 100vh;
 
   ${(props) =>
     props.$type === "dark" &&

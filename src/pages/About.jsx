@@ -18,6 +18,7 @@ import DivJoinUs from "../ui/AboutUs/DivJoinUs";
 import { useNavigate } from "react-router-dom";
 import ContactDiv from "../ui/AboutUs/ContactDiv";
 import Footer from "../ui/AboutUs/Footer";
+import { useUser } from "../features/authentication/useUser";
 
 //to verify
 
@@ -62,6 +63,8 @@ const Img = styled.img`
 
 ////////////////////
 function About() {
+  const { isAuthenticated } = useUser();
+
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -162,19 +165,21 @@ function About() {
         </Section2>
 
         <Section3>
-          <DivJoinUs>
-            <Heading as="h1">Join us today</Heading>
+          {!isAuthenticated && (
+            <DivJoinUs>
+              <Heading as="h1">Join us today</Heading>
 
-            <p>
-              Embark on a literary adventure with us today! Dive into a world of
-              captivating stories, insightful knowledge, and endless
-              possibilities
-            </p>
+              <p>
+                Embark on a literary adventure with us today! Dive into a world
+                of captivating stories, insightful knowledge, and endless
+                possibilities
+              </p>
 
-            <Button $size="large" onClick={() => navigate("/signup")}>
-              Sign up
-            </Button>
-          </DivJoinUs>
+              <Button $size="large" onClick={() => navigate("/signup")}>
+                Sign up
+              </Button>
+            </DivJoinUs>
+          )}
 
           <ContactDiv>
             <Heading as="h2">Contact us</Heading>
